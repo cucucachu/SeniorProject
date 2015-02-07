@@ -1,0 +1,14 @@
+package com.codey.OpenGL;
+
+public class SpringForce extends ForceField {
+	private double forceConstant;
+	
+	public ForceField(double forceConstant) {
+		this.forceConstant = forceConstant;
+	}
+	
+	public double forceAtPoint(double position) {
+		return (forceConstant * (400 - position));
+	}
+
+}

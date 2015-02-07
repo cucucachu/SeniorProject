@@ -1,0 +1,22 @@
+package com.codey.OpenGL;
+
+public class Moon {
+	private float position;
+	private float velocity;
+	private float mass;
+	
+	public Moon(float position, float velocity, float mass) {
+		this.position = position;
+		this.velocity = velocity;
+		this.mass = mass;
+	}
+	
+	public void step(float timeStep, float force) {
+		velocity += (force / mass)*(position)*(timeStep);
+		position += velocity * timeStep;
+	}	
+	
+	public float getPosition() {
+		return position;
+	}
+}

@@ -1,0 +1,24 @@
+package com.codey.OpenGL;
+
+public class Moon {
+	private double position;
+	private double velocity;
+	private double mass;
+	
+	public Moon(double position, double velocity, double mass) {
+		this.position = position;
+		this.velocity = velocity;
+		this.mass = mass;
+	}
+	
+	public void step(double timeStep, double force) {
+		System.out.printf("Old position: %f\n", position);
+		velocity += (force / mass)*(position)*(timeStep);
+		position += velocity * timeStep;
+		
+	}	
+	
+	public double getPosition() {
+		return position;
+	}
+}

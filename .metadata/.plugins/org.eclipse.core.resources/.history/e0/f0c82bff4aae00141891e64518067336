@@ -1,0 +1,12 @@
+package com.codey.OpenGL;
+
+public abstract class ForceField {
+	protected double forceConstant;
+	
+	protected ForceField(double forceConstant) {
+		this.forceConstant = forceConstant;
+		System.out.printf("spring constant %f\n", forceConstant);
+	}
+	
+	public abstract double forceAtPoint(double position);
+}

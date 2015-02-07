@@ -1,0 +1,13 @@
+package com.codey.OpenGL;
+
+public class ForceField {
+	private double forceConstant;
+	
+	public ForceField() {
+		
+	}
+	
+	public double forceAtPoint(double mass) {
+		return -
+	}
+}

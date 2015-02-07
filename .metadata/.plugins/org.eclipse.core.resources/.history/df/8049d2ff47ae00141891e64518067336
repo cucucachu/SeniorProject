@@ -1,0 +1,43 @@
+package com.codey.OpenGL;
+
+import org.lwjgl.LWJGLException;
+
+public class Spring {
+	
+	private Painter picaso;
+	
+	public static Mass mass;
+	public static ForceField spring;
+	
+	public Spring(Painter picaso) {
+		this.picaso = picaso
+	}
+	
+	public static void launch() throws LWJGLException, Exception {
+		LibraryLoader.loadNativeLibrary();
+		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
+		modelSetup();
+		run();
+		picaso.janitor();
+	}
+	
+	public static void modelSetup() {
+		mass = new Mass(100.0, 0.0, 1.0);
+		spring = new ForceField(0.01);
+	}
+	
+	public static void run() {	
+		double force;
+		
+		while(!picaso.isCloseRequested()) {
+			picaso.checkForDisplayResize();
+			force = spring.forceAtPoint(mass.getPosition());
+			mass.step(1, force);
+			picaso.clear();
+			picaso.drawSquare(mass.getPosition(), HEIGHT/2, 20);
+			picaso.render();
+		}
+		
+		picaso.janitor();
+	}
+}

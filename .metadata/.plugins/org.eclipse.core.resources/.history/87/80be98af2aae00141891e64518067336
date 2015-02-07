@@ -1,0 +1,17 @@
+package com.codey.OpenGL;
+
+public class Moon {
+	double position;
+	double velocity;
+	double mass;
+	
+	public Moon(double position, double velocity, double mass) {
+		this.postition = position;
+		this.velocity = velocity;
+		this.mass = mass;
+	}
+	
+	double step() {
+		
+	}	
+}
