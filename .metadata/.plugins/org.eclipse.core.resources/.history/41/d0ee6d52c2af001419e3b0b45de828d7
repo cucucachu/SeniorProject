@@ -1,0 +1,30 @@
+package com.codey.OpenGL;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class Particle {
+	private Vector3D position;
+	private Vector3D velocity;
+	private double mass;
+	
+	public Particle(Vector3D position, Vector3D velocity, double mass) {
+		this.position = position;
+		this.velocity = velocity;
+		this.mass = mass;
+	}
+	
+	public void step(double timeStep, Vector3D force) {
+		//velocity += (force)*(timeStep);
+		velocity = velocity.add(force.scalarMultiply(timeStep));
+		//position += velocity * timeStep;		
+		position = position.add(velocity.scalarMultiply(timeStep));
+	}	
+	
+	public Vector3D getPosition() {
+		return position;
+	}	
+	
+	public double getPosition() {
+		return mass;
+	}
+}

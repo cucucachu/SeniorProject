@@ -1,30 +1,53 @@
 package com.codey.OpenGL;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
 public class Orbit {
+	private static final int NUM_PARTICLES = 3;
 	private Painter picaso;
 	
-	public static Mass mass;
-	public static GravitationalField gravity;
+	public ArrayList<Particle> particles;
+	public GravitationalForce gravity;
 	
 	public Orbit(Painter picaso) {
+		Particle particle;
+		Random random = new Random();
 		this.picaso = picaso;
-		mass = new Mass(100.0, 0.0, 1.0);
-		gravity = new GravitationalField(0.01);
+		particles = new ArrayList<Particle>();
+		
+
+		particle = new Particle(new Vector3D(960, 540, 0),
+								new Vector3D(0, 0, 0), 10.0);
+		particles.add(particle);
+		
+		for (int i = 0; i < NUM_PARTICLES; i++) {
+			particle = new Particle(new Vector3D(480 + 960*random.nextDouble(), 270 + 540*random.nextDouble(), 0),
+									new Vector3D(0*random.nextDouble() - 0, 0*random.nextDouble() - 0, 0), 1.0);
+			particles.add(particle);
+		}
+		
+		gravity = new GravitationalForce(0.1, particles);
 	}
 	
 	public void run() {	
-		double force;
+		Vector3D force;
 		
 		while(!picaso.isCloseRequested()) {
 			picaso.checkForDisplayResize();
-			force = gravity.forceAtPoint(mass.getPosition());
-			mass.step(1, force);
 			picaso.clear();
-			picaso.drawSquare(mass.getPosition(), 300, 20);
+			
+			for (Particle particle : particles) {
+				force = gravity.forceOnParticle(particle);
+				particle.step(1, force);
+				//picaso.drawSphere(particle.getPosition(), 1, 20); 
+				picaso.drawParticle(particle);
+			}
 			picaso.render();
 		}
 		
 		picaso.janitor();
 	}
-
 }

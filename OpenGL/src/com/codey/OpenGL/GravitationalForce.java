@@ -1,14 +1,32 @@
 package com.codey.OpenGL;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import java.util.ArrayList;
 
-public class GravitationalForce extends ForceField {
-
-	public GravitationalForce(double gravitationalConstant) {
-		super(gravitationalConstant);
+public class GravitationalForce extends NForceField {
+	
+	public GravitationalForce(double gravitationalConstant, ArrayList<Particle> particles) {
+		super(gravitationalConstant, particles);
 	}
 	
 	@Override
-	public double forceAtPoint(double position_x, double position_y) {
-		return 0;
+	public Vector3D forceOnParticle(Particle particle) {
+		Vector3D r, force;
+		double magnitude;
+		
+		force = Vector3D.ZERO;
+		
+		for (Particle other : particles) {
+			if (!other.equals(particle)) {
+				r = other.getPosition().subtract(particle.getPosition());
+				r = r.normalize();
+				magnitude = r.getNorm();
+				force = force.add(
+						r.scalarMultiply(
+						other.getMass() * forceConstant / (magnitude * magnitude * magnitude))
+						);
+			}
+		}
+		return force;
 	}
 
 }

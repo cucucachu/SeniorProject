@@ -1,0 +1,10 @@
+package com.codey.OpenGL;
+
+import java.util.ArrayList;
+
+public class Mathematician {
+	
+	public NVector(int dimension) {
+		
+	}
+}

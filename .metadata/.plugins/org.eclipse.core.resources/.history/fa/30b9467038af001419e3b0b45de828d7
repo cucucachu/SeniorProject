@@ -1,0 +1,16 @@
+package com.codey.OpenGL;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import java.util.ArrayList;
+
+public abstract class NForceField extends ForceField {
+
+	private ArrayList<
+	
+	@Override
+	public Vector3D forceAtPoint(Vector3D position) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

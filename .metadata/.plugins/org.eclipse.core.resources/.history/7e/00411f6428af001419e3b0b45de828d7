@@ -1,0 +1,46 @@
+package com.codey.OpenGL;
+
+import org.lwjgl.LWJGLException;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import java.util.Random;
+import java.util.ArrayList;
+
+public class Spring {
+	
+	private Painter picaso;
+	
+	public ArrayList<Particle> particles;
+	public SpringForce spring;
+	
+	public Spring(Painter picaso) {
+		Particle particle;
+		Random random = new Random();
+		this.picaso = picaso;
+		particles = new ArrayList<Particle>();
+		
+		
+		for (int i = 0; i < NUM_PARTICLES;
+				particle = new Particle(new Vector3D(1920*random.nextInt(), 1080*random.nextInt(), 0),
+							new Vector3D(100*random.nextInt(), 100*random.nextInt(), 0), 1.0);
+		
+		System.out.println
+		spring = new SpringForce(0.01);
+	}
+	
+	public void run() {	
+		Vector3D force;
+		
+		while(!picaso.isCloseRequested()) {
+			picaso.checkForDisplayResize();
+			force = spring.forceAtPoint(mass.getPosition());
+			mass.step(1, force);
+			picaso.clear();
+			//picaso.drawSquare(mass.getPosition(), 300, 20);
+			picaso.drawSphere(mass.getPosition(), 10, 20); 
+			picaso.render();
+		}
+		
+		picaso.janitor();
+	}
+}

@@ -1,0 +1,25 @@
+package com.codey.OpenGL;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class GravitationalForce extends ForceField {
+	private static final Vector3D center = new Vector3D(960, 540, -500);
+	
+	public GravitationalForce(double gravitationalConstant) {
+		super(gravitationalConstant);
+	}
+	
+	@Override
+	public Vector3D forceAtPoint(Vector3D position) {
+		Vector3D r;
+		double magnitude;
+		
+		r = position.subtract();
+		magnitude = r.getNorm();		
+		
+		
+		System.out.printf("Position %f %f %f\n", position.getX(), position.getY(), position.getZ());
+		System.out.printf("Force %f %f %f\n\n", vector.getX(), vector.getY(), vector.getZ());
+		return vector;
+	}
+
+}

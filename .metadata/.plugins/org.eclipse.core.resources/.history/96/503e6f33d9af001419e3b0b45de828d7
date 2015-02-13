@@ -1,0 +1,113 @@
+package com.codey.OpenGL;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class SolarSystem {
+	
+	//Mass unit is 10^27 kg
+	private static final double SUN_MASS = 1988.55;
+	private static final double JUPITER_MASS = 1.8986;
+	private static final double SATURN_MASS = 0.56846;
+	private static final double NEPTUNE_MASS = 0.102430;
+	private static final double URANUS_MASS = 0.086832;
+	private static final double EARTH_MASS = 0.0059736;
+	private static final double VENUS_MASS = 0.0048685;
+	private static final double MARS_MASS =  0.00064185;
+	private static final double MERCURY_MASS = 0.0003302;
+	private static final double PLUTO_MASS = 0.000013105;
+	
+
+	// Distance unit 4,000,000 km
+	private static final double JUPITER_DISTANCE = 194.58521;
+	private static final double SATURN_DISTANCE = 356.666605;
+	private static final double NEPTUNE_DISTANCE = 1124.59911;
+	private static final double URANUS_DISTANCE = 717.6645;
+	private static final double EARTH_DISTANCE = 37.39956;
+	private static final double VENUS_DISTANCE = 27.052368;
+	private static final double MARS_DISTANCE = 56.98595;
+	private static final double MERCURY_DISTANCE = 14.477306;
+	private static final double PLUTO_DISTANCE = 1476.595;
+	
+
+	// Velocity ( 4,000,000 km / 0.25 years)
+	private static final double JUPITER_VELOCITY = 8.191257;
+	private static final double SATURN_VELOCITY = 6.047505;
+	private static final double NEPTUNE_VELOCITY = 3.409858;
+	private static final double URANUS_VELOCITY = 4.2657209;
+	private static final double EARTH_VELOCITY = 18.6853807;
+	private static final double VENUS_VELOCITY = 21.971503;
+	private static final double MARS_VELOCITY = 15.105605;
+	private static final double MERCURY_VELOCITY = 29.714353;
+	private static final double PLUTO_VELOCITY = 3.409858;
+
+	private static final double SOLAR_SYSTEM_WIDTH = 1920;
+	private static final double SOLAR_SYSTEM_HEIGHT = 1080;
+	
+	private Painter picaso;
+	
+	public ArrayList<Particle> particles;
+	public GravitationalForce gravity;
+	
+	public SolarSystem(Painter picaso) {
+		Particle particle;
+		Random random = new Random();
+		this.picaso = picaso;
+		particles = new ArrayList<Particle>();
+		
+		//Sun
+		particle = new Particle(new Vector3D(SOLAR_SYSTEM_WIDTH/2, SOLAR_SYSTEM_HEIGHT/2, 0),
+								new Vector3D(0, 0, 0), SUN_MASS);
+		particles.add(particle);
+		
+		//Jupiter
+		particle = new Particle(new randomPointOnCircle
+		
+		
+		
+		gravity = new GravitationalForce(0.1, particles);
+	}
+	
+	public void run() {	
+		Vector3D force;
+		
+		while(!picaso.isCloseRequested()) {
+			picaso.checkForDisplayResize();
+			picaso.clear();
+			
+			for (Particle particle : particles) {
+				force = gravity.forceOnParticle(particle);
+				particle.step(1, force);
+				//picaso.drawSphere(particle.getPosition(), 1, 20); 
+				picaso.drawParticle(particle);
+			}
+			picaso.render();
+		}
+		
+		picaso.janitor();
+	}
+	
+	private Vector3D randomPointOnCircle(double radius) {
+		Random randomGenerator;
+		double theta, x, y;
+		
+		randomGenerator = new Random();
+		
+		theta = 2 * Math.PI * randomGenerator.nextDouble();
+		x = radius * Math.cos(theta);
+		y = radius * Math.sin(theta);
+		
+		return new Vector3D(x, y, 0.0);
+	}
+	
+	private Vector3D velocityVector(Vector3D position, double velocity) {
+		Vector3D v;
+		double theta;
+		
+		theta = Math.atan2(position.getY(), position.getX()) + (Math.PI / 2.0);
+		v = new Vector3D(Math.cos(theta), Math.sin(theta), 0);
+		return v.scalarMultiply(velocity);
+	}
+}

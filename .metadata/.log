@@ -146,3 +146,12 @@ Command-line arguments:  -os linux -ws gtk -arch x86_64
 !MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.team.examples.filesystem/doc-html/team_filesystem_ex.html cannot be opened.
 !SUBENTRY 1 org.eclipse.help.base 4 4 2015-01-28 21:27:06.593
 !MESSAGE Help document /org.eclipse.platform.doc.isv/samples/org.eclipse.swt.examples.controls/doc-html/swt_controls_ex.html cannot be opened.
+!SESSION 2015-02-08 15:28:29.089 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2015-02-08 15:28:46.483
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

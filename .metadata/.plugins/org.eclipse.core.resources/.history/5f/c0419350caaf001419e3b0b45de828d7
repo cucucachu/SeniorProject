@@ -1,0 +1,65 @@
+package com.codey.OpenGL;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class SolarSystem {
+
+	private static final double SUN_MASS = 1988.55;
+	private static final double JUPITER_MASS = 1.8986;
+	private static final double SATURN_MASS = 0.56846;
+	private static final double NEPTUNE_MASS = 0.102430;
+	private static final double URANUS_MASS = 0.086832;
+	private static final double EARTH_MASS = 0.0059736;
+	private static final double VENUS_MASS = 0.0048685;
+	private static final double MARS_MASS =  0.00064185;
+	private static final double MERCURY_MASS = 0.0003302;
+	private static final double PLUTO_MASS = 0.000013105;
+	
+	
+	private Painter picaso;
+	
+	public ArrayList<Particle> particles;
+	public GravitationalForce gravity;
+	
+	public SolarSystem(Painter picaso) {
+		Particle particle;
+		Random random = new Random();
+		this.picaso = picaso;
+		particles = new ArrayList<Particle>();
+		
+
+		particle = new Particle(new Vector3D(960, 540, 0),
+								new Vector3D(0, 0, 0), 10.0);
+		particles.add(particle);
+		
+		for (int i = 0; i < NUM_PARTICLES; i++) {
+			particle = new Particle(new Vector3D(480 + 960*random.nextDouble(), 270 + 540*random.nextDouble(), 0),
+									new Vector3D(0*random.nextDouble() - 0, 0*random.nextDouble() - 0, 0), 1.0);
+			particles.add(particle);
+		}
+		
+		gravity = new GravitationalForce(0.1, particles);
+	}
+	
+	public void run() {	
+		Vector3D force;
+		
+		while(!picaso.isCloseRequested()) {
+			picaso.checkForDisplayResize();
+			picaso.clear();
+			
+			for (Particle particle : particles) {
+				force = gravity.forceOnParticle(particle);
+				particle.step(1, force);
+				//picaso.drawSphere(particle.getPosition(), 1, 20); 
+				picaso.drawParticle(particle);
+			}
+			picaso.render();
+		}
+		
+		picaso.janitor();
+	}
+}
