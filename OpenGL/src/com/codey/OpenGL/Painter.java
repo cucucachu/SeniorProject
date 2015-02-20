@@ -9,6 +9,7 @@ import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.glBegin;
 import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glClearColor;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
@@ -23,6 +24,7 @@ import static org.lwjgl.opengl.GL11.glColor3d;
 import static org.lwjgl.opengl.GL11.glTranslated;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.util.glu.GLU.*;
 
 import org.lwjgl.LWJGLException;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
@@ -34,10 +36,14 @@ import org.lwjgl.util.glu.Sphere;
 public class Painter {
 	private int screenWidth;
 	private int screenHeight;
-	private static final int screenDepth = 10000;
+	private static final int screenDepth = 1000000;
 	private int frameRate;
 	private static final int SPHERE_SLICES = 20;
-	private static final int RADIUS_PER_MASS = 1;
+
+	private static final float fieldOfView = 70.0f;
+	private static final float aspectRatio = 16.f/9.f;//(float)Display.getWidth() / (float)Display.getHeight();
+	private static final float near = 0.3f;
+	private static final float far = 10000.0f;
 	
 	
 	public Painter(int screenWidth, int screenHeight, int frameRate) throws LWJGLException {
@@ -55,29 +61,27 @@ public class Painter {
 		Display.setFullscreen(true);
 		Display.create();
 
-		glViewport(0, 0, Display.getWidth(), Display.getHeight());
-		
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glViewport(0, 0, Display.getWidth(), Display.getHeight());
 		
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, screenWidth, 0, screenHeight, -screenDepth / 2, screenDepth / 2);
+		gluPerspective(fieldOfView, aspectRatio, near, far);
+		
 		glMatrixMode(GL_MODELVIEW);
-		glClearColor(0f, 0f, 0f, 1f);
+		glEnable(GL_DEPTH_TEST);
 	}
 	
 	public void clear() {
 		// Clear the screen and depth buffer
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	
-		glColor3d(.5, .25, 1);
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);	
 	}
 	
 	public void drawSquare(double x, double y, double width) {		
 		
 		glPushMatrix();
 		{
-			glTranslated(x, y, 0);
+			glTranslated(x, y, -100);
 			glBegin(GL_QUADS);
 			{
 				glVertex2d(width/2.0, width/2.0);

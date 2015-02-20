@@ -9,6 +9,7 @@ public class Launcher {
 	public static final int FRAME_RATE = 32;
 	
 	public static Painter picaso;
+	public static CameraMan carl;
 	public static Spring spring;
 	public static Orbit gravity;
 	public static StaticOrbit staticGravity;
@@ -29,6 +30,7 @@ public class Launcher {
 
 		  LibraryLoader.loadNativeLibrary();
 		
+		  /*
 		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
 		spring = new Spring(picaso);
 		spring.run();
@@ -43,10 +45,11 @@ public class Launcher {
 		gravity = new Orbit(picaso);
 		gravity.run();
 		picaso.janitor();
-		
+		*/
 		  
 		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
-		solarSystem = new SolarSystem(picaso);
+		carl = new CameraMan();
+		solarSystem = new SolarSystem(picaso, carl);
 		solarSystem.run();
 		picaso.janitor();
 	}

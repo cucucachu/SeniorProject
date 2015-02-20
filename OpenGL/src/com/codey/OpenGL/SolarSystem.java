@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import static org.apache.commons.math3.util.FastMath.toDegrees;
 
 public class SolarSystem {
 	
@@ -67,28 +68,31 @@ public class SolarSystem {
 
 	private static final double SOLAR_SYSTEM_WIDTH = 1920;
 	private static final double SOLAR_SYSTEM_HEIGHT = 1080;
-	private static final int BACKGROUND_STARS = 100;
+	private static final int BACKGROUND_STARS = 1000;
 	private static final double GRAVITATIONAL_CONSTANT = 0.0006;
+	private static final double STAR_DISTANCE = 3000;
 	
 	private Painter picaso;
+	private CameraMan carl;
 	
 	public ArrayList<Particle> particles;
 	private Vector3D stars[];
 	public GravitationalForce gravity;
 	
-	public SolarSystem(Painter picaso) {
+	public SolarSystem(Painter picaso, CameraMan carl) {
 		Particle particle;
 		Random random = new Random();
 		Vector3D position;
 		Vector3D velocity;
 		double mass;
 		this.picaso = picaso;
+		this.carl = carl;
 		particles = new ArrayList<Particle>();
 		
 		makeStars();
 		
 		//Sun
-		particle = new Particle(new Vector3D(SOLAR_SYSTEM_WIDTH/2, SOLAR_SYSTEM_HEIGHT/2, 0),
+		particle = new Particle(new Vector3D(0, 0, 0),
 								new Vector3D(0, 0, 0), SUN_MASS, SUN_RADIUS);
 		particle.setColor(SUN_COLOR);
 		particles.add(particle);
@@ -167,6 +171,12 @@ public class SolarSystem {
 		
 		
 		gravity = new GravitationalForce(GRAVITATIONAL_CONSTANT, particles);
+		/*
+		position = new Vector3D(1, 0, 0);
+		velocity = velocityVector(position, 1);
+		
+		System.out.printf("Velocity Vector %f, %f\n", velocity.getNorm(), toDegrees(Math.atan2(velocity.getX(), velocity.getY())));
+		*/
 	}
 	
 	public void run() {	
@@ -175,6 +185,8 @@ public class SolarSystem {
 		while(!picaso.isCloseRequested()) {
 			picaso.checkForDisplayResize();
 			picaso.clear();
+			
+			carl.setup();
 
 			drawBackground();
 			for (Particle particle : particles) {
@@ -182,6 +194,7 @@ public class SolarSystem {
 				particle.step(0.5, force);
 				picaso.drawParticle(particle);
 			}
+			picaso.drawSquare(0, 0, 100);
 			picaso.render();
 		}
 		
@@ -195,14 +208,34 @@ public class SolarSystem {
 		stars = new Vector3D[BACKGROUND_STARS];
 		
 		for (int i = 0; i < BACKGROUND_STARS; i++)
-			stars[i] = new Vector3D(SOLAR_SYSTEM_WIDTH * random.nextDouble(),
-					SOLAR_SYSTEM_HEIGHT * random.nextDouble(), 999);
+			stars[i] = randomPointOnSphere(STAR_DISTANCE);
 	}
 	
 	private void drawBackground() {	
 		for (int i = 0; i < BACKGROUND_STARS; i++) {
 			picaso.drawSphere(stars[i], 1, 4);
 		}
+	}
+	
+	private Vector3D randomPointOnSphere(double radius) {
+		Random randomGenerator;
+		double x1, x2;
+		double x, y, z;
+		
+		randomGenerator = new Random();
+		
+		do {
+			x1 = (randomGenerator.nextDouble() * 2) - 1;
+			x2 = (randomGenerator.nextDouble() * 2) - 1;
+		}
+		while ((x1 * x1) + (x2 * x2) > 1);
+
+		x = (2. * x1) * Math.sqrt(1 - (x1 * x1) - (x2 * x2));
+		y = (2. * x2) * Math.sqrt(1 - (x1 * x1) - (x2 * x2));
+		z = 1 - (2 * ((x1 * x1) + (x2 * x2)));
+		
+		return new Vector3D(radius * x, radius * y, radius * z);
+		
 	}
 	
 	private Vector3D randomPointOnCircle(double radius) {
@@ -212,8 +245,8 @@ public class SolarSystem {
 		randomGenerator = new Random();
 		
 		theta = 2 * Math.PI * randomGenerator.nextDouble();
-		x = (SOLAR_SYSTEM_WIDTH / 2) + radius * Math.cos(theta);
-		y = (SOLAR_SYSTEM_HEIGHT / 2) +  radius * Math.sin(theta);
+		x = radius * Math.cos(theta);
+		y = radius * Math.sin(theta);
 		
 		return new Vector3D(x, y, 0.0);
 	}
@@ -222,10 +255,11 @@ public class SolarSystem {
 		Vector3D v;
 		double theta;
 		
-		theta = Math.atan2(position.getY() - (SOLAR_SYSTEM_WIDTH / 2),
-				position.getX() - (SOLAR_SYSTEM_HEIGHT / 2)) + (Math.PI / 2.0);
+		theta = Math.atan2(position.getY(), position.getX()) + (Math.PI / 2.0);
+		
 		
 		v = new Vector3D(Math.cos(theta), Math.sin(theta), 0);
+		
 		return v.scalarMultiply(velocity);
 	}
 }

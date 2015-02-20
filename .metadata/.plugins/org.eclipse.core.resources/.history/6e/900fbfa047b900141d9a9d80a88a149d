@@ -1,0 +1,60 @@
+package com.codey.OpenGL;
+
+import static org.lwjgl.opengl.GL11.glTranslated;
+
+import org.lwjgl.opengl.Display;
+import static org.lwjgl.opengl.GL11.glRotated;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.glu.GLU;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.apache.commons.math3.geometry.euclidean.threed.SphericalCoordinates;
+import static org.apache.commons.math3.util.FastMath.toDegrees;
+
+
+public class CameraMan {
+	private SphericalCoordinates position;
+	
+	
+	public CameraMan() {
+		position = new SphericalCoordinates(1000, 0, 0);
+		set();
+	}
+	
+	public void setup() {
+		reset();
+		moveCamera();
+		set();
+	}
+	
+	private void reset() {
+		glLoadIdentity();
+		
+	}
+	
+	private void moveCamera() {
+		double dPhi, dTheta, dr;
+		double r, theta, phi;
+		
+		r = position.getR();
+		theta = position.getTheta();
+		phi = position.getPhi();
+		
+		dTheta = Mouse.isButtonDown(0) ? -Mouse.getDX() : 0;
+		dPhi = Mouse.isButtonDown(0) ? -Mouse.getDY() * Math.PI / 90. : 0;
+		dr = -Mouse.getDWheel() / 5;
+		
+		position = new SphericalCoordinates(r + dr,	theta + dTheta, phi + dPhi);
+	}
+	
+	private void set() {
+		Vector3D positionXYZ;
+
+		positionXYZ = position.getCartesian();
+		
+		GLU.gluLookAt((float)positionXYZ.getX(), (float)positionXYZ.getY(), (float)positionXYZ.getZ(), 0f, 0f, 0f, 0f, 1f, 0f);
+	}
+	
+}

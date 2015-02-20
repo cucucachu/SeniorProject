@@ -1,0 +1,55 @@
+package com.codey.OpenGL;
+
+import static org.lwjgl.opengl.GL11.glTranslated;
+
+import static org.lwjgl.opengl.GL11.glRotated;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.input.Keyboard;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class CameraMan {
+	private Vector3D position;
+	private Vector3D rotation;
+	
+	private static final double fieldOfView;
+	private static final double asspectRatio;
+	private static final double near;
+	private static final double far;
+	
+	public CameraMan() {
+		
+	}
+	
+	public void track(Particle particle) {
+	}
+	
+	public void moveCamera() {
+		int dx, dy, dz;
+		double targetX, targetY, targetZ;
+		
+		dx = -Mouse.getDY()/2;
+		dy = -Mouse.getDX()/2;
+		//dz = Mouse.getDWheel()/60;
+
+        //dx = Keyboard.isKeyDown(Keyboard.KEY_A) ? 1 : 0;
+        //dx = Keyboard.isKeyDown(Keyboard.KEY_D) ? -1 : 0;
+        //dz = Keyboard.isKeyDown(Keyboard.KEY_W) ? 1 : 0;
+        //dz = Keyboard.isKeyDown(Keyboard.KEY_S) ? -1 : 0;
+
+
+		if (Mouse.isButtonDown(0)) {
+
+		        glRotated(dx, 1, 0, 0);
+				glRotated(dy, 0, 1, 0);
+		}
+        //glRotated(dx, 1, 0, 0);
+		//glRotated(dy, 0, 1, 0);
+        //glRotated(dz, 0, 0, 1);
+		
+
+		dz = Mouse.getDWheel();
+		
+        glTranslated(0, 0, dz);
+	}
+}

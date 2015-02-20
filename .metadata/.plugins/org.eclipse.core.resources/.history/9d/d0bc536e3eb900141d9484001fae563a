@@ -1,0 +1,45 @@
+package com.codey.OpenGL;
+
+import static org.lwjgl.opengl.GL11.glTranslated;
+
+import org.lwjgl.opengl.Display;
+import static org.lwjgl.opengl.GL11.glRotated;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.input.Keyboard;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.apache.commons.math3.geometry.euclidean.threed.SphericalCoordinates;
+
+
+public class CameraMan {
+	private SphericalCoordinates position;
+	
+	
+	public CameraMan() {
+		Vector3D positionXYZ;
+		position = new SphericalCoordinates(1000, 0, 0);
+		
+		positionXYZ = position.getCartesian();
+		glTranslated(-positionXYZ.getX(), -positionXYZ.getY(), -positionXYZ.getZ());
+	}
+	
+	public void setup() {
+		//glRotated(rotation.getZ(), 0, 0, 1);
+		//glTranslated(position.getX(), position.getY(), position.getZ());
+	}
+	
+	private void moveCamera() {
+		double dx, dy, dz;
+		double r, theta, phi;
+		
+		r = position.getR();
+		theta = position.getTheta();
+		phi = position.getPhi();
+		
+		dy = Mouse.isButtonDown(0) ? -Mouse.getDX() : 0;
+		dx = Mouse.isButtonDown(0) ? -Mouse.getDY() : 0;
+		dz = Mouse.getDWheel() / 10;
+		
+		position = new SphericalCoordinates(r + dz, theta + dy, phi + dx);
+	}
+}

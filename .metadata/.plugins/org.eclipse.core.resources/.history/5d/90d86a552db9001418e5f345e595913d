@@ -1,0 +1,256 @@
+package com.codey.OpenGL;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class SolarSystem {
+	
+	//Mass unit is 10^27 kg
+	private static final double SUN_MASS = 1988.55;
+	private static final double JUPITER_MASS = 1.8986;
+	private static final double SATURN_MASS = 0.56846;
+	private static final double NEPTUNE_MASS = 0.102430;
+	private static final double URANUS_MASS = 0.086832;
+	private static final double EARTH_MASS = 0.0059736;
+	private static final double VENUS_MASS = 0.0048685;
+	private static final double MARS_MASS =  0.00064185;
+	private static final double MERCURY_MASS = 0.0003302;
+	private static final double PLUTO_MASS = 0.000013105;
+	
+
+	// Distance unit 4,000,000 km
+	private static final double JUPITER_DISTANCE = 194.585;
+	private static final double SATURN_DISTANCE = 356.6666;
+	private static final double NEPTUNE_DISTANCE = 1124.599;
+	private static final double URANUS_DISTANCE = 717.6645;
+	private static final double EARTH_DISTANCE = 37.399;
+	private static final double VENUS_DISTANCE = 27.0523;
+	private static final double MARS_DISTANCE = 56.985;
+	private static final double MERCURY_DISTANCE = 14.4773;
+	private static final double PLUTO_DISTANCE = 1476.595;
+	
+
+	// Velocity ( 4,000,000 km / 0.25 years)
+	private static final double JUPITER_VELOCITY = 8.191257;
+	private static final double SATURN_VELOCITY = 6.047505;
+	private static final double NEPTUNE_VELOCITY = 3.409858;
+	private static final double URANUS_VELOCITY = 4.2657209;
+	private static final double EARTH_VELOCITY = 18.6853807;
+	private static final double VENUS_VELOCITY = 21.971503;
+	private static final double MARS_VELOCITY = 15.105605;
+	private static final double MERCURY_VELOCITY = 29.714353;
+	private static final double PLUTO_VELOCITY = 3.409858;
+
+	private static final double SUN_RADIUS = 50;
+	private static final double JUPITER_RADIUS = 40;
+	private static final double SATURN_RADIUS = 35;
+	private static final double NEPTUNE_RADIUS = 30;
+	private static final double URANUS_RADIUS = 31;
+	private static final double EARTH_RADIUS = 10;
+	private static final double VENUS_RADIUS = 7;
+	private static final double MARS_RADIUS = 8;
+	private static final double MERCURY_RADIUS = 6;
+	private static final double PLUTO_RADIUS = 1;
+
+	private static final double[] SUN_COLOR = {1.,1.,0};
+	private static final double[] JUPITER_COLOR = {.97,.46,.19};
+	private static final double[] SATURN_COLOR = {1.,.9,.65};
+	private static final double[] NEPTUNE_COLOR = {.16,.23,.7};
+	private static final double[] URANUS_COLOR = {.2,.3,.6};
+	private static final double[] EARTH_COLOR = {0.,.55,.27};
+	private static final double[] VENUS_COLOR = {.71,.65,.26};
+	private static final double[] MARS_COLOR = {.95,.4,.0};
+	private static final double[] MERCURY_COLOR = {.8,.75,.44};
+	private static final double[] PLUTO_COLOR = {.85,.96,.94};
+
+	private static final double SOLAR_SYSTEM_WIDTH = 1920;
+	private static final double SOLAR_SYSTEM_HEIGHT = 1080;
+	private static final int BACKGROUND_STARS = 1000;
+	private static final double GRAVITATIONAL_CONSTANT = 0.0006;
+	
+	private Painter picaso;
+	private CameraMan carl;
+	
+	public ArrayList<Particle> particles;
+	private Vector3D stars[];
+	public GravitationalForce gravity;
+	
+	public SolarSystem(Painter picaso, CameraMan carl) {
+		Particle particle;
+		Random random = new Random();
+		Vector3D position;
+		Vector3D velocity;
+		double mass;
+		this.picaso = picaso;
+		this.carl = carl;
+		particles = new ArrayList<Particle>();
+		
+		makeStars();
+		
+		//Sun
+		particle = new Particle(new Vector3D(0, 0, 0),
+								new Vector3D(0, 0, 0), SUN_MASS, SUN_RADIUS);
+		particle.setColor(SUN_COLOR);
+		particles.add(particle);
+		
+		//JUPITER
+		position = randomPointOnCircle(JUPITER_DISTANCE);
+		velocity = velocityVector(position, JUPITER_VELOCITY);
+		mass = JUPITER_MASS;
+		particle = new Particle(position, velocity, mass, JUPITER_RADIUS);
+		particle.setColor(JUPITER_COLOR);
+		particles.add(particle);	
+		
+		//SATURN
+		position = randomPointOnCircle(SATURN_DISTANCE);
+		velocity = velocityVector(position, SATURN_VELOCITY);
+		mass = SATURN_MASS;
+		particle = new Particle(position, velocity, mass, SATURN_RADIUS);
+		particle.setColor(SATURN_COLOR);
+		particles.add(particle);	
+		
+		//NEPTUNE
+		position = randomPointOnCircle(NEPTUNE_DISTANCE);
+		velocity = velocityVector(position, NEPTUNE_VELOCITY);
+		mass = NEPTUNE_MASS;
+		particle = new Particle(position, velocity, mass, NEPTUNE_RADIUS);
+		particle.setColor(NEPTUNE_COLOR);
+		particles.add(particle);	
+		
+		//URANUS
+		position = randomPointOnCircle(URANUS_DISTANCE);
+		velocity = velocityVector(position, URANUS_VELOCITY);
+		mass = URANUS_MASS;
+		particle = new Particle(position, velocity, mass, URANUS_RADIUS);
+		particle.setColor(URANUS_COLOR);
+		particles.add(particle);	
+		
+		//EARTH
+		position = randomPointOnCircle(EARTH_DISTANCE);
+		velocity = velocityVector(position, EARTH_VELOCITY);
+		mass = EARTH_MASS;
+		particle = new Particle(position, velocity, mass, EARTH_RADIUS);
+		particle.setColor(EARTH_COLOR);
+		particles.add(particle);	
+		
+		//VENUS
+		position = randomPointOnCircle(VENUS_DISTANCE);
+		velocity = velocityVector(position, VENUS_VELOCITY);
+		mass = VENUS_MASS;
+		particle = new Particle(position, velocity, mass, VENUS_RADIUS);
+		particle.setColor(VENUS_COLOR);
+		particles.add(particle);	
+		
+		//MARS
+		position = randomPointOnCircle(MARS_DISTANCE);
+		velocity = velocityVector(position, MARS_VELOCITY);
+		mass = MARS_MASS;
+		particle = new Particle(position, velocity, mass, MARS_RADIUS);
+		particle.setColor(MARS_COLOR);
+		particles.add(particle);	
+		
+		//MERCURY
+		position = randomPointOnCircle(MERCURY_DISTANCE);
+		velocity = velocityVector(position, MERCURY_VELOCITY);
+		mass = MERCURY_MASS;
+		particle = new Particle(position, velocity, mass, MERCURY_RADIUS);
+		particle.setColor(MERCURY_COLOR);
+		particles.add(particle);	
+		
+		//PLUTO
+		position = randomPointOnCircle(PLUTO_DISTANCE);
+		velocity = velocityVector(position, PLUTO_VELOCITY);
+		mass = PLUTO_MASS;
+		particle = new Particle(position, velocity, mass, PLUTO_RADIUS);
+		particle.setColor(PLUTO_COLOR);
+		particles.add(particle);	
+		
+		
+		gravity = new GravitationalForce(GRAVITATIONAL_CONSTANT, particles);
+		
+	}
+	
+	public void run() {	
+		Vector3D force;
+		
+		while(!picaso.isCloseRequested()) {
+			picaso.checkForDisplayResize();
+			picaso.clear();
+			
+			carl.moveCamera();
+
+			drawBackground();
+			for (Particle particle : particles) {
+				force = gravity.forceOnParticle(particle);
+				particle.step(0.5, force);
+				picaso.drawParticle(particle);
+			}
+			picaso.render();
+		}
+		
+		picaso.janitor();
+	}
+	
+	private void makeStars() {
+		Random random;
+		
+		random = new Random();
+		stars = new Vector3D[BACKGROUND_STARS];
+		
+		for (int i = 0; i < BACKGROUND_STARS; i++)
+			stars[i] = new Vector3D(SOLAR_SYSTEM_WIDTH * random.nextDouble(),
+					SOLAR_SYSTEM_HEIGHT * random.nextDouble(), -2000);
+	}
+	
+	private void drawBackground() {	
+		for (int i = 0; i < BACKGROUND_STARS; i++) {
+			picaso.drawSphere(stars[i], 1, 4);
+		}
+		//picaso.drawSquare(0, 0, 200);
+	}
+	
+	private Vector3D randomPointOnSphere(double radius) {
+		Random randomGenerator;
+		double x1, x2;
+		Vector3D position;
+		double x, y, z;
+		
+		randomGenerator = new Random();
+		
+		do {
+			x1 = (randomGenerator.nextDouble() * 2) - 1;
+			x2 = (randomGenerator.nextDouble() * 2) - 1;
+		}
+		while ((x1 * x1) + (x2 * x2) > radius * radius);
+
+		x = (2. * x1) * Math.sqrt(radius - (x1 * x1) - (x2 * x2));
+		x = (2. * x1) * Math.sqrt(radius - (x1 * x1) - (x2 * x2)); 
+		
+	}
+	
+	private Vector3D randomPointOnCircle(double radius) {
+		Random randomGenerator;
+		double theta, x, y;
+		
+		randomGenerator = new Random();
+		
+		theta = 2 * Math.PI * randomGenerator.nextDouble();
+		x = radius * Math.cos(theta);
+		y = radius * Math.sin(theta);
+		
+		return new Vector3D(x, y, 0.0);
+	}
+	
+	private Vector3D velocityVector(Vector3D position, double velocity) {
+		Vector3D v;
+		double theta;
+		
+		theta = Math.atan2(position.getY(), position.getX()) + (Math.PI / 2.0);
+		
+		v = new Vector3D(Math.cos(theta), Math.sin(theta), 0);
+		
+		return v.scalarMultiply(velocity);
+	}
+}

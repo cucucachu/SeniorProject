@@ -1,0 +1,38 @@
+package com.codey.OpenGL;
+
+import static org.lwjgl.opengl.GL11.glTranslated;
+
+import org.lwjgl.opengl.Display;
+import static org.lwjgl.opengl.GL11.glRotated;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.input.Keyboard;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+
+public class CameraMan {
+	private Vector3D position;
+	private Vector3D rotation;
+	
+	
+	public CameraMan() {
+		position = new Vector3D(0, 0, 0);
+		rotation = new Vector3D(0, 0, 0);
+		glTranslated(0, 0, 100);
+	}
+	
+	public void moveCamera() {
+		double dx, dy, dz;
+
+		dy = Mouse.isButtonDown(0) ? -Mouse.getDX() : 0;
+		dx = Mouse.isButtonDown(0) ? -Mouse.getDY() : 0;
+		dz = Mouse.getDWheel() / 10;
+		if (dz != 0)
+		System.out.printf("dz %f\n", dz);
+		glRotated(dx, 1, 0, 0);
+		glRotated(dy, 0, 1, 0);
+		glTranslated(0, 0, dz);
+		//glRotated(rotation.getZ(), 0, 0, 1);
+		//glTranslated(position.getX(), position.getY(), position.getZ());
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.codey.OpenGL.Camera.java&apos; to &apos;CameraMan.java&apos;&#x0A;- Original project: &apos;OpenGL&apos;&#x0A;- Original element: &apos;com.codey.OpenGL.Camera.java&apos;&#x0A;- Renamed element: &apos;com.codey.OpenGL.CameraMan.java&apos;" description="Rename compilation unit &apos;Camera.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;com.codey.OpenGL{Camera.java" name="CameraMan.java" references="false" stamp="1424403304613" version="1.0"/>
+</session>
