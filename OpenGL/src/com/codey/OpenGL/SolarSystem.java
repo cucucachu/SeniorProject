@@ -19,41 +19,44 @@ public class SolarSystem {
 	private static final double MARS_MASS =  0.00064185;
 	private static final double MERCURY_MASS = 0.0003302;
 	private static final double PLUTO_MASS = 0.000013105;
+	private static final double MOON_MASS = 0.00007342;
+
+	// Distance unit 1,000,000 km
+	private static final double JUPITER_DISTANCE = 778.30821/4.;
+	private static final double SATURN_DISTANCE = 1426.666422/4.;
+	private static final double NEPTUNE_DISTANCE = 4498.396441/4.;
+	private static final double URANUS_DISTANCE = 2870.658186/4.;
+	private static final double EARTH_DISTANCE = 149.598262/4.;
+	private static final double VENUS_DISTANCE = 108.209475/4.;
+	private static final double MARS_DISTANCE = 227.943824/4.;
+	private static final double MERCURY_DISTANCE = 57.909227/4.;
+	private static final double PLUTO_DISTANCE = 5906.38/4.;
+	private static final double MOON_DISTANCE = 0.3844/4.;
 	
 
-	// Distance unit 4,000,000 km
-	private static final double JUPITER_DISTANCE = 194.585;
-	private static final double SATURN_DISTANCE = 356.6666;
-	private static final double NEPTUNE_DISTANCE = 1124.599;
-	private static final double URANUS_DISTANCE = 717.6645;
-	private static final double EARTH_DISTANCE = 37.399;
-	private static final double VENUS_DISTANCE = 27.0523;
-	private static final double MARS_DISTANCE = 56.985;
-	private static final double MERCURY_DISTANCE = 14.4773;
-	private static final double PLUTO_DISTANCE = 1476.595;
-	
+	// Velocity ( 1,000,000 km / hr)
+	private static final double JUPITER_VELOCITY = 0.047002/4.;
+	private static final double SATURN_VELOCITY = 0.034701/4.;
+	private static final double NEPTUNE_VELOCITY = 0.019566/4.;
+	private static final double URANUS_VELOCITY = 0.024477/4.;
+	private static final double EARTH_VELOCITY = 0.107218/4.;
+	private static final double VENUS_VELOCITY = 0.126074/4.;
+	private static final double MARS_VELOCITY = 0.086677/4.;
+	private static final double MERCURY_VELOCITY = 0.17053/4.;
+	private static final double PLUTO_VELOCITY = 0.019566/4.;
+	private static final double MOON_VELOCITY = 0.000001022/4.;
 
-	// Velocity ( 4,000,000 km / 0.25 years)
-	private static final double JUPITER_VELOCITY = 8.191257;
-	private static final double SATURN_VELOCITY = 6.047505;
-	private static final double NEPTUNE_VELOCITY = 3.409858;
-	private static final double URANUS_VELOCITY = 4.2657209;
-	private static final double EARTH_VELOCITY = 18.6853807;
-	private static final double VENUS_VELOCITY = 21.971503;
-	private static final double MARS_VELOCITY = 15.105605;
-	private static final double MERCURY_VELOCITY = 29.714353;
-	private static final double PLUTO_VELOCITY = 3.409858;
-
-	private static final double SUN_RADIUS = 50;
-	private static final double JUPITER_RADIUS = 40;
-	private static final double SATURN_RADIUS = 35;
-	private static final double NEPTUNE_RADIUS = 30;
-	private static final double URANUS_RADIUS = 31;
-	private static final double EARTH_RADIUS = 10;
-	private static final double VENUS_RADIUS = 7;
-	private static final double MARS_RADIUS = 8;
-	private static final double MERCURY_RADIUS = 6;
-	private static final double PLUTO_RADIUS = 1;
+	private static final double SUN_RADIUS = 69.55/6.;//50;
+	private static final double JUPITER_RADIUS = 6.99;
+	private static final double SATURN_RADIUS = 5.823;
+	private static final double NEPTUNE_RADIUS = 2.462;
+	private static final double URANUS_RADIUS = 2.5362;
+	private static final double EARTH_RADIUS = 0.63709;
+	private static final double VENUS_RADIUS = 0.60517;
+	private static final double MARS_RADIUS = 0.3389;
+	private static final double MERCURY_RADIUS = .244;
+	private static final double PLUTO_RADIUS = 0.1151;
+	private static final double MOON_RADIUS = EARTH_RADIUS / 4.;
 
 	private static final double[] SUN_COLOR = {1.,1.,0};
 	private static final double[] JUPITER_COLOR = {.97,.46,.19};
@@ -65,22 +68,25 @@ public class SolarSystem {
 	private static final double[] MARS_COLOR = {.95,.4,.0};
 	private static final double[] MERCURY_COLOR = {.8,.75,.44};
 	private static final double[] PLUTO_COLOR = {.85,.96,.94};
+	private static final double[] MOON_COLOR = {.75, .75, .75};
 
 	private static final double SOLAR_SYSTEM_WIDTH = 1920;
 	private static final double SOLAR_SYSTEM_HEIGHT = 1080;
 	private static final int BACKGROUND_STARS = 1000;
-	private static final double GRAVITATIONAL_CONSTANT = 0.0006;
 	private static final double STAR_DISTANCE = 3000;
+	
+	private static final double GRAVITATIONAL_CONSTANT = 0.000864929664/64.;
+	private static final double TIME_STEP = 68.484; // 1/4 year per second
 	
 	private Painter picaso;
 	private CameraMan carl;
 	
 	public ArrayList<Particle> particles;
 	private Vector3D stars[];
-	public GravitationalForce gravity;
+	public SSGravitationalForce gravity;
 	
 	public SolarSystem(Painter picaso, CameraMan carl) {
-		Particle particle;
+		Particle particle, moon;
 		Random random = new Random();
 		Vector3D position;
 		Vector3D velocity;
@@ -95,6 +101,47 @@ public class SolarSystem {
 		particle = new Particle(new Vector3D(0, 0, 0),
 								new Vector3D(0, 0, 0), SUN_MASS, SUN_RADIUS);
 		particle.setColor(SUN_COLOR);
+		particles.add(particle);
+		
+		//MERCURY
+		position = randomPointOnCircle(MERCURY_DISTANCE);
+		velocity = velocityVector(position, MERCURY_VELOCITY);
+		mass = MERCURY_MASS;
+		particle = new Particle(position, velocity, mass, MERCURY_RADIUS);
+		particle.setColor(MERCURY_COLOR);
+		particles.add(particle);	
+		
+		//VENUS
+		position = randomPointOnCircle(VENUS_DISTANCE);
+		velocity = velocityVector(position, VENUS_VELOCITY);
+		mass = VENUS_MASS;
+		particle = new Particle(position, velocity, mass, VENUS_RADIUS);
+		particle.setColor(VENUS_COLOR);
+		particles.add(particle);	
+		
+		//EARTH
+		position = randomPointOnCircle(EARTH_DISTANCE);
+		velocity = velocityVector(position, EARTH_VELOCITY);
+		mass = EARTH_MASS;
+		particle = new Particle(position, velocity, mass, EARTH_RADIUS);
+		particle.setColor(EARTH_COLOR);
+		particles.add(particle);
+		
+		//LUNA
+		position = randomPointOnCircle(MOON_DISTANCE);
+		velocity = velocityVector(position, MOON_VELOCITY).add(particle.getVelocity());
+		position = position.add(particle.getPosition());
+		mass = MOON_MASS;
+		moon = new Particle(position, velocity, mass, MOON_RADIUS);
+		moon.setColor(MOON_COLOR);
+		particles.add(moon);
+		
+		//MARS
+		position = randomPointOnCircle(MARS_DISTANCE);
+		velocity = velocityVector(position, MARS_VELOCITY);
+		mass = MARS_MASS;
+		particle = new Particle(position, velocity, mass, MARS_RADIUS);
+		particle.setColor(MARS_COLOR);
 		particles.add(particle);
 		
 		//JUPITER
@@ -127,39 +174,7 @@ public class SolarSystem {
 		mass = URANUS_MASS;
 		particle = new Particle(position, velocity, mass, URANUS_RADIUS);
 		particle.setColor(URANUS_COLOR);
-		particles.add(particle);	
-		
-		//EARTH
-		position = randomPointOnCircle(EARTH_DISTANCE);
-		velocity = velocityVector(position, EARTH_VELOCITY);
-		mass = EARTH_MASS;
-		particle = new Particle(position, velocity, mass, EARTH_RADIUS);
-		particle.setColor(EARTH_COLOR);
-		particles.add(particle);	
-		
-		//VENUS
-		position = randomPointOnCircle(VENUS_DISTANCE);
-		velocity = velocityVector(position, VENUS_VELOCITY);
-		mass = VENUS_MASS;
-		particle = new Particle(position, velocity, mass, VENUS_RADIUS);
-		particle.setColor(VENUS_COLOR);
-		particles.add(particle);	
-		
-		//MARS
-		position = randomPointOnCircle(MARS_DISTANCE);
-		velocity = velocityVector(position, MARS_VELOCITY);
-		mass = MARS_MASS;
-		particle = new Particle(position, velocity, mass, MARS_RADIUS);
-		particle.setColor(MARS_COLOR);
-		particles.add(particle);	
-		
-		//MERCURY
-		position = randomPointOnCircle(MERCURY_DISTANCE);
-		velocity = velocityVector(position, MERCURY_VELOCITY);
-		mass = MERCURY_MASS;
-		particle = new Particle(position, velocity, mass, MERCURY_RADIUS);
-		particle.setColor(MERCURY_COLOR);
-		particles.add(particle);	
+		particles.add(particle);		
 		
 		//PLUTO
 		position = randomPointOnCircle(PLUTO_DISTANCE);
@@ -168,15 +183,10 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, PLUTO_RADIUS);
 		particle.setColor(PLUTO_COLOR);
 		particles.add(particle);	
+
 		
-		
-		gravity = new GravitationalForce(GRAVITATIONAL_CONSTANT, particles);
-		/*
-		position = new Vector3D(1, 0, 0);
-		velocity = velocityVector(position, 1);
-		
-		System.out.printf("Velocity Vector %f, %f\n", velocity.getNorm(), toDegrees(Math.atan2(velocity.getX(), velocity.getY())));
-		*/
+		gravity = new SSGravitationalForce(GRAVITATIONAL_CONSTANT, particles);
+		carl.setParticles(particles);
 	}
 	
 	public void run() {	
@@ -190,11 +200,11 @@ public class SolarSystem {
 
 			drawBackground();
 			for (Particle particle : particles) {
+				
 				force = gravity.forceOnParticle(particle);
-				particle.step(0.5, force);
+				particle.step(TIME_STEP, force);
 				picaso.drawParticle(particle);
 			}
-			picaso.drawSquare(0, 0, 100);
 			picaso.render();
 		}
 		

@@ -34,11 +34,13 @@ public class Particle {
 	}
 	
 	public void step(double timeStep, Vector3D force) {
-		//velocity += (force)*(timeStep);
 		velocity = velocity.add(force.scalarMultiply(timeStep));
-		//position += velocity * timeStep;		
 		position = position.add(velocity.scalarMultiply(timeStep));
 	}	
+	
+	public void verletStep(double timeStep, Vector3D accel) {
+		
+	}
 
 	public void setColor(double red, double green, double blue) {
 		rgb[0] = red;
@@ -55,6 +57,16 @@ public class Particle {
 	public Vector3D getPosition() {
 		return position;
 	}	
+	
+	public Vector3D getVelocity() {
+		return velocity;
+	}	
+	
+	public void print() {
+		System.out.println("Particle:");
+		System.out.printf("   Pos: (%.2f, %.2f)", position.getX(), position.getY());
+		System.out.printf("   Vel: (%.2f, %.2f)\n", velocity.getX(), velocity.getY());
+	}
 	
 	public double getMass() {
 		return mass;

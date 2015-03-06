@@ -7,6 +7,7 @@ import static org.lwjgl.opengl.GL11.glRotated;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.glu.GLU;
+import java.util.ArrayList;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
@@ -16,10 +17,14 @@ import static org.apache.commons.math3.util.FastMath.toDegrees;
 
 public class CameraMan {
 	private SphericalCoordinates position;
-	
+	private Particle target;
+	private ArrayList<Particle> particles;
+	private int debounce;
 	
 	public CameraMan() {
 		position = new SphericalCoordinates(1000, 0, 0);
+		target = new Particle(new Vector3D(0, 0, 0), new Vector3D(0, 0, 0), 0.);
+		debounce = 0;
 		set();
 	}
 	
@@ -29,9 +34,17 @@ public class CameraMan {
 		set();
 	}
 	
+	public void track(Particle particle) {
+		target = particle;
+	}
+	
+	public void setParticles(ArrayList<Particle> particles) {
+		this.particles = particles;
+		target = particles.get(0);
+	}
+	
 	private void reset() {
-		glLoadIdentity();
-		
+		glLoadIdentity();	
 	}
 	
 	private void moveCamera() {
@@ -43,17 +56,39 @@ public class CameraMan {
 		phi = position.getPhi();
 		
 		dPhi = Mouse.isButtonDown(0) ? -Mouse.getDX() * Math.PI / 90. : 0;
-		dr = -Mouse.getDWheel() / 3;
+		dr = -((Mouse.getDWheel() / 120) * .1 * position.getR());
 		
 		position = new SphericalCoordinates(r + dr, 0, phi + dPhi);
+		
+		
+		if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D)) && debounce == 0) {
+			track(particles.get((particles.indexOf(target) + 1 ) % (particles.size()) ));
+			debounce = 8;
+		}
+		
+		if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A)) && debounce == 0) {
+			if (particles.indexOf(target) != 0)
+				track(particles.get((particles.indexOf(target) - 1) % (particles.size()) ));
+			else 
+				track(particles.get(particles.size() - 1));
+			debounce = 8;
+		}
+		
+		if (debounce != 0)
+			debounce--;
 	}
 	
 	private void set() {
 		Vector3D positionXYZ;
-
-		positionXYZ = position.getCartesian();
+		Vector3D lookAt;
 		
-		GLU.gluLookAt((float)positionXYZ.getX(), (float)positionXYZ.getY(), (float)positionXYZ.getZ(), 0f, 0f, 0f, 0f, 1f, 0f);
+		positionXYZ = position.getCartesian();
+		lookAt = target.getPosition();
+		
+		positionXYZ = positionXYZ.add(lookAt);
+		
+		GLU.gluLookAt((float)positionXYZ.getX(), (float)positionXYZ.getY(), (float)positionXYZ.getZ(),
+				(float)lookAt.getX(), (float)lookAt.getY(), (float)lookAt.getZ(), 0f, 1f, 0f);
 	}
 	
 }

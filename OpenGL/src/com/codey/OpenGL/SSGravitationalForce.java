@@ -18,11 +18,11 @@ public class SSGravitationalForce extends NForceField {
 		for (Particle other : particles) {
 			if (!other.equals(particle)) {
 				r = other.getPosition().subtract(particle.getPosition());
-				r = r.normalize();
 				magnitude = r.getNorm();
+				r = r.normalize();
 				force = force.add(
 						r.scalarMultiply(
-						other.getMass() * forceConstant / (magnitude * magnitude * magnitude))
+						other.getMass() * forceConstant / (magnitude * magnitude))
 						);
 			}
 		}

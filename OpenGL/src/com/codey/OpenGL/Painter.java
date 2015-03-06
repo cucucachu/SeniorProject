@@ -78,6 +78,7 @@ public class Painter {
 	}
 	
 	public void drawSquare(double x, double y, double width) {		
+		glColor3d(1.,1.,1.);
 		
 		glPushMatrix();
 		{
