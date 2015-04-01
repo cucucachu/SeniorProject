@@ -1,25 +1,36 @@
 package com.codey.OpenGL;
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import java.util.ArrayList;
+import org.apache.commons.math3.exception.MathArithmeticException;
 
 public class SSGravitationalForce extends NForceField {
 	
-	public SSGravitationalForce(double gravitationalConstant, ArrayList<Particle> particles) {
-		super(gravitationalConstant, particles);
+	public SSGravitationalForce(double gravitationalConstant, ArrayList<Particle> particles, double theta) {
+		super(gravitationalConstant, particles, theta);
 	}
 	
 	@Override
 	public Vector3D forceOnParticle(Particle particle) {
 		Vector3D r, force;
 		double magnitude;
+		ArrayList<Particle> reducedParticles;
+		
+		reducedParticles = octoTree.reducedParticles(particle.getPosition());
 		
 		force = Vector3D.ZERO;
 		
-		for (Particle other : particles) {
+		for (Particle other : reducedParticles) {
 			if (!other.equals(particle)) {
 				r = other.getPosition().subtract(particle.getPosition());
 				magnitude = r.getNorm();
-				r = r.normalize();
+				
+				try {
+					r = r.normalize();
+				}
+				catch (MathArithmeticException ex) {
+					r = Vector3D.ZERO;
+				}
+				
 				force = force.add(
 						r.scalarMultiply(
 						other.getMass() * forceConstant / (magnitude * magnitude))

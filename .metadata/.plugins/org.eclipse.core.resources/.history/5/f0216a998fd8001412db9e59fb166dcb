@@ -1,0 +1,18 @@
+package com.codey.OpenGL;
+
+import java.util.ArrayList;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class QuadTree {
+	
+	private QuadNode root;
+	
+	public QuadTree(Vector3D size, ArrayList<Particle> particles, double theta) {
+		Vector3D rootPosition;
+		
+		rootPosition = new Vector3D(size.getX() / 2., size.getY() / 2., 0);
+		
+		root = new QuadNode(
+	}
+	
+}

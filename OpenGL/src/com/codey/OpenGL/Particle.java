@@ -9,6 +9,18 @@ public class Particle {
 	private double radius;
 	private double rgb[];
 	
+	public Particle(Vector3D position, double mass) {
+		this.position = position;
+		this.velocity = Vector3D.ZERO;
+		this.mass = mass;
+		radius = 0;
+		
+		rgb = new double[3];
+		rgb[0] = .5;
+		rgb[1] = .5;
+		rgb[2] = .5;
+	}
+	
 	public Particle(Vector3D position, Vector3D velocity, double mass) {
 		this.position = position;
 		this.velocity = velocity;
@@ -57,6 +69,18 @@ public class Particle {
 	public Vector3D getPosition() {
 		return position;
 	}	
+	
+	public double getX() {
+		return position.getX();
+	}	
+	
+	public double getY() {
+		return position.getY();
+	}	
+	
+	public double getZ() {
+		return position.getZ();
+	}
 	
 	public Vector3D getVelocity() {
 		return velocity;
