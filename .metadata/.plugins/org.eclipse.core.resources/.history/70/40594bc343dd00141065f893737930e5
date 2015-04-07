@@ -1,0 +1,17 @@
+package com.codey.OpenGL;
+
+public class Conservationist {
+
+	public boolean energyConserved() {
+		
+	}
+	
+	public boolean linearMomentumConserved() {
+		
+	}
+	
+	public boolean angularMomentumConserved() {
+		
+	}
+	
+}

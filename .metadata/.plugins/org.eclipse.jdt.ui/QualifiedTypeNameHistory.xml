@@ -6,4 +6,5 @@
 <fullyQualifiedTypeName name="org.lwjgl.opengl.GL11"/>
 <fullyQualifiedTypeName name="org.lwjgl.util.glu.GLU"/>
 <fullyQualifiedTypeName name="org.apache.commons.math3.geometry.euclidean.threed.SphericalCoordinates"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

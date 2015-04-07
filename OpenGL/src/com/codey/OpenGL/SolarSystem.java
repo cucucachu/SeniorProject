@@ -77,13 +77,17 @@ public class SolarSystem {
 	
 	private static final double GRAVITATIONAL_CONSTANT = 0.000864929664/64.;
 	private static final double TIME_STEP = 68.484; // 1/4 year per second
+	private static final double CONSERVATION_TOLERANCE = .01;
+	private static final int MAX_STEPS = 2000;
 	
 	private Painter picaso;
 	private CameraMan carl;
+	private Conservationist colin;
 	
 	public ArrayList<Particle> particles;
 	private Vector3D stars[];
 	public SSGravitationalForce gravity;
+	private static int step = 0;
 	
 	public SolarSystem(Painter picaso, CameraMan carl) {
 		Particle particle, moon;
@@ -92,7 +96,8 @@ public class SolarSystem {
 		Vector3D velocity;
 		double mass;
 		this.picaso = picaso;
-		this.carl = carl;
+		this.carl = carl;	
+		
 		particles = new ArrayList<Particle>();
 		
 		makeStars();
@@ -184,28 +189,59 @@ public class SolarSystem {
 		particle.setColor(PLUTO_COLOR);
 		particles.add(particle);	
 
-		
+		colin = new Conservationist(particles, CONSERVATION_TOLERANCE, GRAVITATIONAL_CONSTANT);
 		gravity = new SSGravitationalForce(GRAVITATIONAL_CONSTANT, particles, 0);
 		carl.setParticles(particles);
 	}
 	
 	public void run() {	
-		Vector3D force;
+		Vector3D forces[];
+		int i;
 		
-		while(!picaso.isCloseRequested()) {
+		while(!picaso.isCloseRequested() && step < MAX_STEPS) {
 			picaso.checkForDisplayResize();
 			picaso.clear();
 			
 			carl.setup();
 
 			drawBackground();
+			
+			forces = new Vector3D[particles.size()];
+			
+			i = 0;
 			for (Particle particle : particles) {
-				
-				force = gravity.forceOnParticle(particle);
-				particle.step(TIME_STEP, force);
-				picaso.drawParticle(particle);
+				forces[i] = gravity.forceOnParticle(particle);
+				i++;
 			}
+			
+			i = 0;
+			for (Particle particle : particles) {
+				particle.step(TIME_STEP, forces[i]);
+				picaso.drawParticle(particle);
+				i++;
+			}
+			
 			picaso.render();
+			
+			//System.out.printf("%d, %.5f\n", step, colin.energyDeviation() * 100);
+			if (!colin.energyConserved()) {
+				System.out.println("Energy Not Conserved!");
+				break;
+			}
+			
+			//System.out.printf("%d, %.5f\n", step, colin.linearMomentumDeviation() * 100);
+			if (!colin.linearMomentumConserved()) {
+				System.out.println("Linear Momentum Not Conserved!");
+				break;
+			}
+			
+			//System.out.printf("%d, %.5f\n", step, colin.angularMomentumDeviation() * 100);
+			if (!colin.angularMomentumConserved()) {
+				System.out.println("Angular Momentum Not Conserved!");
+				break;
+			}
+			
+			step++;
 		}
 		
 		picaso.janitor();

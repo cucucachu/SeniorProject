@@ -1,0 +1,103 @@
+package com.codey.OpenGL;
+import java.util.ArrayList;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class Conservationist {
+
+	private ArrayList<Particle> particles;
+	private double totalEnergy;
+	private Vector3D initialLinearMomentum;
+	private Vector3D initialAngularMomentum;
+	private double tolerance;
+	
+	public Conservationist(ArrayList<Particle> particles, double tolerance) {
+		this.particles = particles;
+		this.tolerance = tolerance;
+		
+		totalEnergy = energy();
+		initialLinearMomentum = linearMomentum();
+		initialAngularMomentum = angularMomentum();
+	}
+	
+	public boolean energyConserved() {
+		double currentEnergy;
+		
+		currentEnergy = energy();
+		
+		return (currentEnergy < totalEnergy + (totalEnergy * tolerance)
+				&& currentEnergy > totalEnergy - (totalEnergy * tolerance));
+	}
+	
+	public boolean linearMomentumConserved() {
+		
+		return true;
+		
+	}
+	
+	public boolean angularMomentumConserved() {
+		return true;
+		
+	}
+	
+	private double energy() {
+		return kineticEnergy() + potentialEnergy();
+	}
+	
+	private double kineticEnergy() {
+		double ke;
+		
+		ke = 0;
+		for (Particle particle : particles)
+			ke += kineticEnergyForParticle(particle);
+		
+		return ke;
+	}
+	
+	private double potentialEnergy() {
+		double pe;
+		
+		pe = 0;
+		for (Particle particle : particles)
+			pe += potentialEnergyForParticle(particle);
+	
+		return pe;
+		
+	}
+	
+	private double linearMomentum() {
+		double momentum;
+		
+		momentum = 0;
+		for (Particle particle : particles)
+			momentum += linearMomentumForParticle(particle);
+		
+		return momentum;
+	}
+	
+	private double angularMomentum() {
+		double momentum;
+		
+		momentum = 0;
+		for (Particle particle : particles)
+			momentum += angularMomentumForParticle(particle);
+		
+		return momentum;
+		
+	}
+	
+	private double kineticEnergyForParticle(Particle particle) {
+		
+	}
+	
+	private double potentialEnergyForParticle(Particle particle) {
+		
+	}
+	
+	private double linearMomentumForParticle(Particle particle) {
+		
+	}
+	
+	private double angularMomentumForParticle(Particle particle) {
+		
+	}
+}

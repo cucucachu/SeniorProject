@@ -1,0 +1,23 @@
+package com.codey.OpenGL;
+import java.util.ArrayList;
+
+public class Conservationist {
+
+	
+	
+	public boolean energyConserved() {
+		
+		return true;
+	}
+	
+	public boolean linearMomentumConserved() {
+		return true;
+		
+	}
+	
+	public boolean angularMomentumConserved() {
+		return true;
+		
+	}
+	
+}

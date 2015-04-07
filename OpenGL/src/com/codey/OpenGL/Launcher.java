@@ -28,7 +28,7 @@ public class Launcher {
 	
 	public static void launch() throws LWJGLException, Exception {
 
-		  LibraryLoader.loadNativeLibrary();
+		LibraryLoader.loadNativeLibrary();
 		
 		  /*
 		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);

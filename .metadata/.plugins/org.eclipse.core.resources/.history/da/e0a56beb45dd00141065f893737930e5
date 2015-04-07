@@ -1,0 +1,83 @@
+package com.codey.OpenGL;
+import java.util.ArrayList;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class Conservationist {
+
+	private ArrayList<Particle> particles;
+	private double totalEnergy;
+	private double initialLinearMomentum;
+	private double initialAngularMomentum;
+	private double tolerance;
+	
+	public Conservationist(ArrayList<Particle> particles, double tolerance) {
+		this.particles = particles;
+		this.tolerance = tolerance;
+	}
+	
+	public boolean energyConserved() {
+		double currentEnergy;
+		
+		currentEnergy = energy();
+		
+		return (currentEnergy < totalEnergy + (totalEnergy * tolerance)
+				&& currentEnergy > totalEnergy - (totalEnergy * tolerance));
+	}
+	
+	public boolean linearMomentumConserved() {
+		double currentLinearMomentum;
+		double delta;
+		
+		currentLinearMomentum = linearMomentum();
+		delta = initialLinearMomentum * tolerance;
+		
+		return (currentLinearMomentum < initialLinearMomentum + delta
+				&& currentLinearMomentum > initialLinearMomentum - delta);
+		
+	}
+	
+	public boolean angularMomentumConserved() {
+		double currentAngularMomentum;
+		double delta;
+		
+		currentAngularMomentum = linearMomentum();
+		delta = initialAngularMomentum * tolerance;
+		
+		return (currentAngularMomentum < initialAngularMomentum + delta
+				&& currentAngularMomentum > initialAngularMomentum - delta);
+		
+	}
+	
+	private double energy() {
+		return kineticEnergy() + potentialEnergy();
+	}
+	
+	private double kineticEnergy() {
+		double ke;
+		
+		ke = 0;
+		for (Particle particle : particles)
+			ke += kineticEnergyForParticle(particle);
+		
+		return ke;
+	}
+	
+	private double potentialEnergy() {
+		double pe;
+		
+		pe = 0;
+		for (Particle particle : particles)
+			pe += potentialEnergyForParticle(particle);
+	
+		return pe;
+		
+	}
+	
+	private double linearMomentum() {
+		
+	}
+	
+	private double angularMomentum() {
+		
+	}
+}

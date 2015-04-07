@@ -1,0 +1,51 @@
+package com.codey.OpenGL;
+import java.util.ArrayList;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class Conservationist {
+
+	private ArrayList<Particle> particles;
+	private double totalEnergy;
+	private double initialLinearMomentum;
+	private double tolerance;
+	
+	public Conservationist(ArrayList<Particle> particles, double tolerance) {
+		this.particles = particles;
+		this.tolerance = tolerance;
+	}
+	
+	public boolean energyConserved() {
+		
+		return true;
+	}
+	
+	public boolean linearMomentumConserved() {
+		return true;
+		
+	}
+	
+	public boolean angularMomentumConserved() {
+		return true;
+		
+	}
+	
+	private double energy() {
+		return kineticEnergy() + potentialEnergy();
+	}
+	
+	private double kineticEnergy() {
+		
+	}
+	
+	private double potentialEnergy() {
+		
+	}
+	
+	private double linearMomentum() {
+		
+	}
+	
+	private double angularMomentum() {
+		
+	}
+}

@@ -1,0 +1,138 @@
+package com.codey.OpenGL;
+import java.util.ArrayList;
+
+import org.apache.commons.math3.exception.MathArithmeticException;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class Conservationist {
+
+	private ArrayList<Particle> particles;
+	private double totalEnergy;
+	private Vector3D initialLinearMomentum;
+	private Vector3D initialAngularMomentum;
+	private double tolerance;
+	private double forceConstant;
+	
+	public Conservationist(ArrayList<Particle> particles, double tolerance, double forceConstant) {
+		this.particles = particles;
+		this.tolerance = tolerance;
+		this.forceConstant = forceConstant;
+		
+		totalEnergy = energy();
+		//initialLinearMomentum = linearMomentum();
+		//initialAngularMomentum = angularMomentum();
+	}
+	
+	/*
+	 * Conservation of Energy
+	 */
+	public boolean energyConserved() {
+		double currentEnergy;
+		
+		currentEnergy = energy();
+		
+		return (currentEnergy < totalEnergy + (totalEnergy * tolerance)
+				&& currentEnergy > totalEnergy - (totalEnergy * tolerance));
+	}
+	
+	private double energy() {
+		return kineticEnergy() + potentialEnergy();
+	}
+	
+	private double kineticEnergy() {
+		double ke;
+		
+		ke = 0;
+		for (Particle particle : particles)
+			ke += kineticEnergyForParticle(particle);
+		
+		return ke;
+	}
+	
+	private double potentialEnergy() {
+		double pe;
+		
+		pe = 0;
+		for (Particle particle : particles)
+			pe += potentialEnergyForParticle(particle);
+	
+		return pe;
+		
+	}
+	
+	private double kineticEnergyForParticle(Particle particle) {
+		double velocity;
+		
+		velocity = particle.getVelocity().getNorm();
+		
+		return 0.5 * particle.getMass() * velocity * velocity;
+	}
+	
+	private double potentialEnergyForParticle(Particle particle) {
+		Vector3D r;
+		double momentum;
+		double distance;
+		
+		momentum = Vector3D.ZERO;
+		
+		for (Particle other : particles) {
+			if (!other.equals(particle)) {
+				r = other.getPosition().subtract(particle.getPosition());
+				distance = r.getNorm();
+				
+				
+				momentum = momentum.add(
+						r.scalarMultiply(
+						other.getMass() * forceConstant / (distance * distance))
+						);
+			}
+		}
+		return force;
+		
+	}
+	
+	/*
+	 * Conservation of Momentum 
+	 */
+	
+	/*
+	public boolean linearMomentumConserved() {
+		
+		return true;
+		
+	}
+	
+	public boolean angularMomentumConserved() {
+		return true;
+		
+	}
+	
+	private Vector3D linearMomentum() {
+		Vector3D momentum;
+		
+		momentum = Vector3D.ZERO;
+		for (Particle particle : particles)
+			momentum.add(linearMomentumForParticle(particle));
+		
+		return momentum;
+	}
+	
+	private Vector3D angularMomentum() {
+		Vector3D momentum;
+		
+		momentum = Vector3D.ZERO;
+		for (Particle particle : particles)
+			momentum.add(angularMomentumForParticle(particle));
+		
+		return momentum;
+	}
+	
+	private Vector3D linearMomentumForParticle(Particle particle) {
+		
+	}
+	
+	private Vector3D angularMomentumForParticle(Particle particle) {
+		
+	}
+	*/
+}
