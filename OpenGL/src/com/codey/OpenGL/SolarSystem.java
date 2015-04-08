@@ -1,5 +1,10 @@
 package com.codey.OpenGL;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -77,8 +82,8 @@ public class SolarSystem {
 	
 	private static final double GRAVITATIONAL_CONSTANT = 0.000864929664/64.;
 	private static final double TIME_STEP = 68.484; // 1/4 year per second
-	private static final double CONSERVATION_TOLERANCE = .01;
-	private static final double BARNS_HUT_THETA = 0;
+	private static final double CONSERVATION_TOLERANCE = .99;
+	private static final double BARNS_HUT_THETA = .5;
 	private static final int MAX_STEPS = 2000;
 	
 	private Painter picaso;
@@ -195,9 +200,22 @@ public class SolarSystem {
 		carl.setParticles(particles);
 	}
 	
-	public void run() {	
+	public void run() throws Exception {	
 		Vector3D forces[];
 		int i;
+		
+		/*
+		Writer writer;
+		File csv = new File("/home/cody/SolarSystem.csv");
+		
+		if (!csv.exists())
+			csv.createNewFile();
+		
+		writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(csv, false), "utf-8"));
+		
+		writer.write("Step, Energy, Linear Momentum, Angular Momentum\n");
+		*/
+		System.out.println("Step, Energy, Linear Momentum, Angular Momentum");
 		
 		while(!picaso.isCloseRequested() && step < MAX_STEPS) {
 			picaso.checkForDisplayResize();
@@ -228,27 +246,37 @@ public class SolarSystem {
 			
 			picaso.render();
 			
-			//System.out.printf("%d, %.5f\n", step, colin.energyDeviation() * 100);
+			//writer.write(step);
+			System.out.printf("%d", step);
+			
+			//writer.write(", " + colin.energyDeviation() * 100);
+			System.out.printf(", %f", colin.energyDeviation() * 100);
 			if (!colin.energyConserved()) {
-				System.out.println("Energy Not Conserved!");
+				//System.out.println("Energy Not Conserved!");
 				//break;
 			}
 			
-			//System.out.printf("%d, %.5f\n", step, colin.linearMomentumDeviation() * 100);
+			//writer.write(", " + colin.linearMomentumDeviation() * 100);
+			System.out.printf(", %f", colin.linearMomentumDeviation() * 100);
 			if (!colin.linearMomentumConserved()) {
-				System.out.println("Linear Momentum Not Conserved!");
+				//System.out.println("Linear Momentum Not Conserved!");
 				//break;
 			}
 			
-			//System.out.printf("%d, %.5f\n", step, colin.angularMomentumDeviation() * 100);
+			//writer.write(", " + colin.angularMomentumDeviation() * 100);
+			System.out.printf(", %f", colin.angularMomentumDeviation() * 100);
 			if (!colin.angularMomentumConserved()) {
-				System.out.println("Angular Momentum Not Conserved!");
+				//System.out.println("Angular Momentum Not Conserved!");
 				//break;
 			}
+			
+			System.out.printf("\n");
+			//writer.write("\n");
 			
 			step++;
 		}
 		
+		//writer.close();
 		picaso.janitor();
 	}
 	

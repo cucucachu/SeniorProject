@@ -7,4 +7,9 @@
 <fullyQualifiedTypeName name="org.lwjgl.util.glu.GLU"/>
 <fullyQualifiedTypeName name="org.apache.commons.math3.geometry.euclidean.threed.SphericalCoordinates"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="java.io.OutputStreamWriter"/>
+<fullyQualifiedTypeName name="java.io.BufferedWriter"/>
+<fullyQualifiedTypeName name="java.io.Writer"/>
+<fullyQualifiedTypeName name="java.io.File"/>
 </qualifiedTypeNameHistroy>

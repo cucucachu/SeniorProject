@@ -1,0 +1,211 @@
+package com.codey.OpenGL;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import static org.apache.commons.math3.util.FastMath.toDegrees;
+
+public class GalaxyMerger {
+
+	private static final double SOLAR_SYSTEM_WIDTH = 1920;
+	private static final double SOLAR_SYSTEM_HEIGHT = 1080;
+
+	private static final Vector3D MILKYWAY_POSITION = new Vector3D(-600, 300, 400);
+	private static final Vector3D MILKYWAY_VELOCITY = new Vector3D(0, 0, 0);
+	private static final double MILKYWAY_MASS = 4310000;
+	private static final double MILKYWAY_RADIUS = 20;
+	private static final double MILKYWAY_DISK_RADIUS = 100;
+	private static final double[] BLACKHOLE_COLOR = {.1,.1,.1};
+
+	private static final Vector3D ANDROMEDA_POSITION = new Vector3D(700, -200, -450);
+	private static final Vector3D ANDROMEDA_VELOCITY = new Vector3D(0, 0, 0);
+	private static final double ANDROMEDA_MASS = 4310000;
+	private static final double ANDROMEDA_RADIUS = 20;
+	
+	
+	private static final double GRAVITATIONAL_CONSTANT = 0.004302;
+	private static final int NUM_STARS = 10;
+	private static final double TIME_STEP = 68.484; // 1/4 year per second
+	private static final double CONSERVATION_TOLERANCE = .01;
+	private static final double BARNS_HUT_THETA = 0;
+	private static final int MAX_STEPS = 2000;
+	
+	private Painter picaso;
+	private CameraMan carl;
+	private Conservationist colin;
+	
+	public ArrayList<Particle> particles;
+	public SSGravitationalForce gravity;
+	private static int step = 0;
+	
+	public GalaxyMerger(Painter picaso, CameraMan carl) {
+		Particle particle;
+		Random random = new Random();
+		Vector3D position;
+		Vector3D velocity;
+		double mass;
+		this.picaso = picaso;
+		this.carl = carl;	
+		
+		particles = new ArrayList<Particle>();
+
+		milkyWay();
+		andromeda();
+		
+		colin = new Conservationist(particles, CONSERVATION_TOLERANCE, GRAVITATIONAL_CONSTANT);
+		gravity = new SSGravitationalForce(GRAVITATIONAL_CONSTANT, particles, BARNS_HUT_THETA);
+		carl.setParticles(particles);
+	}
+	
+	public void run() {	
+		Vector3D forces[];
+		int i;
+		
+		while(!picaso.isCloseRequested() && step < MAX_STEPS) {
+			picaso.checkForDisplayResize();
+			picaso.clear();
+			
+			carl.setup();
+
+			forces = new Vector3D[particles.size()];
+			
+			i = 0;
+			for (Particle particle : particles) {
+				forces[i] = gravity.forceOnParticle(particle);
+				i++;
+			}
+			
+			i = 0;
+			for (Particle particle : particles) {
+				particle.step(TIME_STEP, forces[i]);
+				picaso.drawParticle(particle);
+				i++;
+			}
+			
+			gravity.updateOctTree();
+			
+			picaso.drawOctTree(gravity.getOctTree().getRoot());
+			
+			picaso.render();
+			
+			//System.out.printf("%d, %.5f\n", step, colin.energyDeviation() * 100);
+			if (!colin.energyConserved()) {
+				System.out.println("Energy Not Conserved!");
+				//break;
+			}
+			
+			//System.out.printf("%d, %.5f\n", step, colin.linearMomentumDeviation() * 100);
+			if (!colin.linearMomentumConserved()) {
+				System.out.println("Linear Momentum Not Conserved!");
+				//break;
+			}
+			
+			//System.out.printf("%d, %.5f\n", step, colin.angularMomentumDeviation() * 100);
+			if (!colin.angularMomentumConserved()) {
+				System.out.println("Angular Momentum Not Conserved!");
+				//break;
+			}
+			
+			step++;
+		}
+		
+		picaso.janitor();
+	}
+	
+	private void milkyWay() {
+		Particle blackHole;
+		Particle star;
+		Vector3D position;
+		Vector3D velocity;
+		double radius;
+		Random random = new Random();
+		
+		blackHole = new Particle(MILKYWAY_POSITION, MILKYWAY_VELOCITY, MILKYWAY_MASS, MILKYWAY_RADIUS);
+		particles.add(blackHole);
+		/*
+		for (int i = 0; i < NUM_STARS; i++) {
+			radius = (random.nextDouble() * MILKYWAY_DISK_RADIUS);
+			position = randomPointOnCircle(radius);
+			velocity = velocityVector(position, 1);
+			
+			position = position.add(MILKYWAY_POSITION);
+			velocity = velocity.add(MILKYWAY_VELOCITY);
+			
+			star = new Particle(position, velocity, 1, radius);
+			particles.add(star);
+		}*/
+	}
+	
+	private void andromeda() {
+		Particle blackHole;
+		Particle star;
+		Vector3D position;
+		Vector3D velocity;
+		double radius;
+		Random random = new Random();
+		
+		blackHole = new Particle(ANDROMEDA_POSITION, ANDROMEDA_VELOCITY, ANDROMEDA_MASS, ANDROMEDA_RADIUS);
+		particles.add(blackHole);
+		
+		/*
+		for (int i = 0; i < NUM_STARS; i++) {
+			radius = (random.nextDouble() * MILKYWAY_DISK_RADIUS);
+			position = randomPointOnCircle(radius);
+			velocity = velocityVector(position, 1);
+			
+			position = position.add(ANDROMEDA_POSITION);
+			velocity = velocity.add(ANDROMEDA_VELOCITY);
+			
+			star = new Particle(position, velocity, 1, radius);
+			particles.add(star);
+		}
+		*/
+	}
+	
+	private Vector3D randomPointOnSphere(double radius) {
+		Random randomGenerator;
+		double x1, x2;
+		double x, y, z;
+		
+		randomGenerator = new Random();
+		
+		do {
+			x1 = (randomGenerator.nextDouble() * 2) - 1;
+			x2 = (randomGenerator.nextDouble() * 2) - 1;
+		}
+		while ((x1 * x1) + (x2 * x2) > 1);
+
+		x = (2. * x1) * Math.sqrt(1 - (x1 * x1) - (x2 * x2));
+		y = (2. * x2) * Math.sqrt(1 - (x1 * x1) - (x2 * x2));
+		z = 1 - (2 * ((x1 * x1) + (x2 * x2)));
+		
+		return new Vector3D(radius * x, radius * y, radius * z);
+		
+	}
+	
+	private Vector3D randomPointOnCircle(double radius) {
+		Random randomGenerator;
+		double theta, x, y;
+		
+		randomGenerator = new Random();
+		
+		theta = 2 * Math.PI * randomGenerator.nextDouble();
+		x = radius * Math.cos(theta);
+		y = radius * Math.sin(theta);
+		
+		return new Vector3D(x, y, 0.0);
+	}
+	
+	private Vector3D velocityVector(Vector3D position, double velocity) {
+		Vector3D v;
+		double theta;
+		
+		theta = Math.atan2(position.getY(), position.getX()) + (Math.PI / 2.0);
+		
+		
+		v = new Vector3D(Math.cos(theta), Math.sin(theta), 0);
+		
+		return v.scalarMultiply(velocity);
+	}
+}

@@ -14,6 +14,7 @@ public class Launcher {
 	public static Orbit gravity;
 	public static StaticOrbit staticGravity;
 	public static SolarSystem solarSystem;
+	public static GalaxyMerger galaxyMerger;
 	
 	public static void main(String[] args) {
 		try {
@@ -45,12 +46,25 @@ public class Launcher {
 		gravity = new Orbit(picaso);
 		gravity.run();
 		picaso.janitor();
+		 
 		*/
-		  
 		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
 		carl = new CameraMan();
 		solarSystem = new SolarSystem(picaso, carl);
-		solarSystem.run();
+		try {
+			solarSystem.run();
+		}
+		catch (Exception ex) {
+			System.out.println("Caught exception: " + ex);
+		}
 		picaso.janitor();
+		 
+		/*
+		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
+		carl = new CameraMan();
+		galaxyMerger = new GalaxyMerger(picaso, carl);
+		galaxyMerger.run();
+		picaso.janitor();
+		*/
 	}
 }
