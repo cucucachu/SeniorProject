@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract class NForceField {
 	protected double forceConstant;
-	protected OctoTree octoTree;
+	protected OctTree octTree;
 	protected ArrayList<Particle> particles;
 	
 	public NForceField(double forceConstant, ArrayList<Particle> particles, double theta) {
@@ -18,20 +18,18 @@ public abstract class NForceField {
 		
 		for (Particle particle : particles) {
 			
-			if (particle.getX() > width)
-				width = particle.getX();
-			
-			if (particle.getY() > width)
-				width = particle.getY();
-			
-			if (particle.getZ() > width)
-				width = particle.getZ();
+			if (particle.getPosition().getNorm() > width)
+				width = particle.getPosition().getNorm();
 		}
 		
 		width *= 2;
 		
-		this.octoTree = new OctoTree(width, theta, particles);
+		this.octTree = new OctTree(width, theta, particles);
 	}
 
 	public abstract Vector3D forceOnParticle(Particle particle);
+	
+	public OctTree getOctTree() {
+		return octTree;
+	}
 }

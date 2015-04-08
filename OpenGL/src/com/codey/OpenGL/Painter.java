@@ -18,12 +18,14 @@ import static org.lwjgl.opengl.GL11.glOrtho;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glVertex2d;
+import static org.lwjgl.opengl.GL11.glVertex3d;
 import static org.lwjgl.opengl.GL11.glViewport;
 import static org.lwjgl.opengl.GL11.glClear;
 import static org.lwjgl.opengl.GL11.glColor3d;
 import static org.lwjgl.opengl.GL11.glTranslated;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_LINE_STRIP;
 import static org.lwjgl.util.glu.GLU.*;
 
 import org.lwjgl.LWJGLException;
@@ -128,6 +130,58 @@ public class Painter {
 			sphere.draw((float)radius, SPHERE_SLICES, SPHERE_SLICES);
 		}
 		glPopMatrix();
+	}
+	
+	public void drawOctTree(OctNode root) {
+		OctNode node;
+
+		if (root == null)
+			return;
+		
+		drawOctTree(root.getNNW());
+		drawOctTree(root.getNNE());
+		drawOctTree(root.getNSW());
+		drawOctTree(root.getNSE());
+		drawOctTree(root.getFNW());
+		drawOctTree(root.getFNE());
+		drawOctTree(root.getFSW());
+		drawOctTree(root.getFSE());
+		
+		drawOctNode(root);
+	}
+	
+	public void drawOctNode(OctNode node) {
+		double x, y, z, d;
+		
+		x = node.getX();
+		y = node.getY();
+		z = node.getZ();
+		d = node.getWidth() / 2.;
+		
+	    glColor3d(0.0f, 1.0f, 0.2f);
+	    glBegin(GL_LINE_STRIP);
+	    {
+	    	glVertex3d(x - d, y - d, z - d);
+	    	glVertex3d(x + d, y - d, z - d);
+	    	glVertex3d(x + d, y + d, z - d);
+	    	glVertex3d(x - d, y + d, z - d);
+	    	glVertex3d(x - d, y - d, z - d);	
+
+	    	glVertex3d(x - d, y - d, z + d);
+	    	glVertex3d(x + d, y - d, z + d);
+	    	glVertex3d(x + d, y + d, z + d);
+	    	glVertex3d(x - d, y + d, z + d);
+	    	glVertex3d(x - d, y - d, z + d);
+
+	    	glVertex3d(x - d, y + d, z + d);
+	    	glVertex3d(x - d, y + d, z - d);
+	    	glVertex3d(x + d, y + d, z - d);
+	    	glVertex3d(x + d, y + d, z + d);
+	    	glVertex3d(x + d, y + d, z - d);
+	    	glVertex3d(x + d, y - d, z - d);
+	    	glVertex3d(x + d, y - d, z + d);
+	    }
+	    glEnd();
 	}
 	
 	public void render() {

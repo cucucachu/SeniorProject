@@ -1,0 +1,169 @@
+package com.codey.OpenGL;
+
+import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
+import static org.lwjgl.opengl.GL11.GL_QUADS;
+import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
+import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glBlendFunc;
+import static org.lwjgl.opengl.GL11.glClearColor;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.glEnd;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glMatrixMode;
+import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glVertex2d;
+import static org.lwjgl.opengl.GL11.glViewport;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glColor3d;
+import static org.lwjgl.opengl.GL11.glTranslated;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_LINE_STRIP;
+import static org.lwjgl.util.glu.GLU.*;
+
+import org.lwjgl.LWJGLException;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.util.glu.Sphere;
+
+
+public class Painter {
+	private int screenWidth;
+	private int screenHeight;
+	private static final int screenDepth = 1000000;
+	private int frameRate;
+	private static final int SPHERE_SLICES = 20;
+
+	private static final float fieldOfView = 70.0f;
+	private static final float aspectRatio = 16.f/9.f;//(float)Display.getWidth() / (float)Display.getHeight();
+	private static final float near = 0.3f;
+	private static final float far = 10000.0f;
+	
+	
+	public Painter(int screenWidth, int screenHeight, int frameRate) throws LWJGLException {
+		this.screenWidth = screenWidth;
+		this.screenHeight = screenHeight;
+		this.frameRate = frameRate;
+		displaySetup();
+	}
+	
+	private void displaySetup() throws LWJGLException {
+		Display.setTitle("OpenGL");
+		Display.setResizable(true);
+		Display.setDisplayMode(new DisplayMode(screenWidth, screenHeight));
+		Display.setVSyncEnabled(true);
+		Display.setFullscreen(true);
+		Display.create();
+
+		//glViewport(0, 0, Display.getWidth(), Display.getHeight());
+		
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		gluPerspective(fieldOfView, aspectRatio, near, far);
+		
+		glMatrixMode(GL_MODELVIEW);
+		glEnable(GL_DEPTH_TEST);
+	}
+	
+	public void clear() {
+		// Clear the screen and depth buffer
+		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);	
+	}
+	
+	public void drawSquare(double x, double y, double width) {		
+		glColor3d(1.,1.,1.);
+		
+		glPushMatrix();
+		{
+			glTranslated(x, y, -100);
+			glBegin(GL_QUADS);
+			{
+				glVertex2d(width/2.0, width/2.0);
+				glVertex2d(width/2.0, -width/2.0);
+				glVertex2d(-width/2.0, -width/2.0);
+				glVertex2d(-width/2.0, width/2.0);
+			}
+			glEnd();
+		}
+		glPopMatrix();
+	}
+	
+	public void drawSphere(Vector3D position, double radius, int slices) {
+		Sphere sphere = new Sphere();
+
+		glColor3d(1.,1.,1.);
+		
+		glPushMatrix();
+		{
+			glTranslated(position.getX(), position.getY(), position.getZ());
+			sphere.draw((float)radius, slices, slices);
+		}
+		glPopMatrix();
+	}
+	
+	public void drawParticle(Particle particle) {
+		Sphere sphere = new Sphere();
+		Vector3D position;
+		double radius;
+		double rgb[];
+		
+		position = particle.getPosition();
+		radius = particle.getRadius();
+		rgb = particle.getColor();
+		
+		if (radius == 0)
+			radius = 10;
+
+		glPushMatrix();
+		{
+			glColor3d(rgb[0], rgb[1], rgb[2]);
+			glTranslated(position.getX(), position.getY(), position.getZ());
+			sphere.draw((float)radius, SPHERE_SLICES, SPHERE_SLICES);
+		}
+		glPopMatrix();
+	}
+	
+	public void drawOctTree(OctTree tree) {
+		
+	}
+	
+	public void drawOctNode(OctNode node) {
+		
+		
+	    GL11.glColor3f(0.0f, 1.0f, 0.2f);
+	    GL11.glBegin(GL_LINE_STRIP);
+
+	    GL11.glVertex2d(point.getX(), point.getY());
+	    GL11.glVertex2d(point2.getX(), point2.getY());
+	    GL11.glEnd();
+		
+	}
+	
+	public void render() {
+		Display.update();
+		Display.sync(frameRate);	
+	}
+
+	
+	public void checkForDisplayResize() {
+		if (Display.wasResized())
+			glViewport(0, 0, Display.getWidth(), Display.getHeight());
+	}
+	
+	public void janitor() {
+		Display.destroy();
+	}
+	
+	public boolean isCloseRequested() {
+		return Display.isCloseRequested();
+	}
+
+}

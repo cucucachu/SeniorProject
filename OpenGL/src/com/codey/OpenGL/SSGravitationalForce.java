@@ -15,7 +15,7 @@ public class SSGravitationalForce extends NForceField {
 		double magnitude;
 		ArrayList<Particle> reducedParticles;
 		
-		reducedParticles = octoTree.reducedParticles(particle.getPosition());
+		reducedParticles = octTree.reducedParticles(particle.getPosition());
 		
 		force = Vector3D.ZERO;
 		
@@ -24,12 +24,9 @@ public class SSGravitationalForce extends NForceField {
 				r = other.getPosition().subtract(particle.getPosition());
 				magnitude = r.getNorm();
 				
-				try {
+				if (!r.equals(Vector3D.ZERO))
 					r = r.normalize();
-				}
-				catch (MathArithmeticException ex) {
-					r = Vector3D.ZERO;
-				}
+				
 				
 				force = force.add(
 						r.scalarMultiply(
@@ -38,6 +35,10 @@ public class SSGravitationalForce extends NForceField {
 			}
 		}
 		return force;
+	}
+	
+	public void updateOctTree() {
+		octTree.divide();
 	}
 
 }
