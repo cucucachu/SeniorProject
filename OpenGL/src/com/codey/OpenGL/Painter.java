@@ -186,7 +186,7 @@ public class Painter {
 	
 	public void render() {
 		Display.update();
-		Display.sync(frameRate);	
+		//Display.sync(frameRate);	
 	}
 
 	

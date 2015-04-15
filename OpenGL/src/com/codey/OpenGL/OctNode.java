@@ -7,6 +7,7 @@ public class OctNode {
 	private Vector3D position;
 	private double width;
 	private double mass;
+	private Vector3D centerOfMass;
 	private double theta;
 	
 	private ArrayList<Particle> particles;
@@ -20,26 +21,28 @@ public class OctNode {
 	private OctNode FSW;
 	private OctNode FSE;
 	
-	public OctNode(Vector3D position, double width, double theta, ArrayList<Particle> particles) {
+	public OctNode(Vector3D position, double width, double theta, ArrayList<Particle> particles) throws Exception {
 		this.position = position;
 		this.theta = theta;
 		this.width = width;
 		this.particles = particles;
+
+		centerOfMass = Vector3D.ZERO;
+		mass = 0;
+		NNW = NNE = NSW = NSE = FNW = FNE = FSW = FSE = null;
 		
-		this.mass = 0;
-		
-		for (Particle particle : particles) {
-			this.mass += particle.getMass();
-		}
-		
-		if (particles.size() > 1)
+		if (particles.size() > 1) {
+			centerOfMass();
 			divide();
-		else
-			NNW = NNE = NSW = NSE = FNW = FNE = FSW = FSE = null;
+		}
+		else if (particles.size() == 1) {
+			centerOfMass = particles.get(0).getPosition();
+			mass = particles.get(0).getMass();
+		}
 
 	}
 	
-	public void divide() {
+	public void divide() throws Exception {
 		ArrayList<Particle> particlesNNW;
 		ArrayList<Particle> particlesNNE;
 		ArrayList<Particle> particlesNSW;
@@ -138,10 +141,10 @@ public class OctNode {
 		if (particles.size() == 1)
 			return particles;
 		
-		distance = this.position.subtract(position).getNorm();
+		distance = this.centerOfMass.subtract(position).getNorm();
 		
 		if (width / distance < theta) {
-			reduced.add(new Particle(this.position, this.mass));
+			reduced.add(new Particle(this.centerOfMass, this.mass));
 			return reduced;
 		}
 
@@ -156,6 +159,22 @@ public class OctNode {
 		
 		return reduced;
 			
+	}
+	
+	private void centerOfMass() throws Exception {
+		if (particles.size() < 1) {
+			throw new Exception("centerOfMass called on leaf node");
+		}
+
+		centerOfMass = Vector3D.ZERO;
+		mass = 0;
+		
+		for (Particle particle : particles) {
+			mass += particle.getMass();
+			centerOfMass.add(particle.getPosition().scalarMultiply(particle.getMass()));
+		}
+		
+		centerOfMass.scalarMultiply(1. / mass);
 	}
 	
 	public double getX() {

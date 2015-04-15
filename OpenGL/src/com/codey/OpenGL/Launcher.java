@@ -47,7 +47,7 @@ public class Launcher {
 		gravity.run();
 		picaso.janitor();
 		 
-		*/
+		
 		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
 		carl = new CameraMan();
 		solarSystem = new SolarSystem(picaso, carl);
@@ -58,13 +58,13 @@ public class Launcher {
 			System.out.println("Caught exception: " + ex);
 		}
 		picaso.janitor();
-		 
-		/*
+		*/
+		
 		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
 		carl = new CameraMan();
 		galaxyMerger = new GalaxyMerger(picaso, carl);
 		galaxyMerger.run();
 		picaso.janitor();
-		*/
+		
 	}
 }

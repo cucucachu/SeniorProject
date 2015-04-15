@@ -1,0 +1,224 @@
+package com.codey.OpenGL;
+
+import java.util.ArrayList;
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class OctNode {
+	private Vector3D position;
+	private double width;
+	private double mass;
+	private Vector3D centerOfMass;
+	private double theta;
+	
+	private ArrayList<Particle> particles;
+
+	private OctNode NNW;
+	private OctNode NNE;
+	private OctNode NSW;
+	private OctNode NSE;
+	private OctNode FNW;
+	private OctNode FNE;
+	private OctNode FSW;
+	private OctNode FSE;
+	
+	public OctNode(Vector3D position, double width, double theta, ArrayList<Particle> particles) {
+		this.position = position;
+		this.theta = theta;
+		this.width = width;
+		this.particles = particles;
+
+		NNW = NNE = NSW = NSE = FNW = FNE = FSW = FSE = null;
+		
+		if (particles.size() > 1) {
+			centerOfMass();
+			divide();
+		}
+		else if (particles.size() == 1) {
+			centerOfMass = particles.get(0).getPosition();
+			mass = particles.get(0).getMass();
+		}
+
+	}
+	
+	public void divide() {
+		ArrayList<Particle> particlesNNW;
+		ArrayList<Particle> particlesNNE;
+		ArrayList<Particle> particlesNSW;
+		ArrayList<Particle> particlesNSE;
+		ArrayList<Particle> particlesFNW;
+		ArrayList<Particle> particlesFNE;
+		ArrayList<Particle> particlesFSW;
+		ArrayList<Particle> particlesFSE;
+
+		
+		Vector3D positionNNW;
+		Vector3D positionNNE;
+		Vector3D positionNSW;
+		Vector3D positionNSE;
+		Vector3D positionFNW;
+		Vector3D positionFNE;
+		Vector3D positionFSW;
+		Vector3D positionFSE;
+		
+		double x = position.getX();
+		double y = position.getY();
+		double z = position.getZ();
+		double particleX, particleY, particleZ;
+		
+		particlesNNW = new ArrayList<Particle>();
+		particlesNNE = new ArrayList<Particle>();
+		particlesNSW = new ArrayList<Particle>();
+		particlesNSE = new ArrayList<Particle>();
+		particlesFNW = new ArrayList<Particle>();
+		particlesFNE = new ArrayList<Particle>();
+		particlesFSW = new ArrayList<Particle>();
+		particlesFSE = new ArrayList<Particle>();
+		
+		for (Particle particle : particles) {
+			particleX = particle.getX();
+			particleY = particle.getY();
+			particleZ = particle.getZ();
+			
+			if (particleX < x && particleY < y && particleZ < z) { // Far South West
+				particlesFSW.add(particle);
+			}
+			else if (particleX >= x && particleY < y && particleZ < z) { // Far South East
+				particlesFSE.add(particle);
+			}
+			else if (particleX >= x && particleY >= y && particleZ < z) { // Far North East
+				particlesFNE.add(particle);
+			}
+			else if (particleX < x && particleY >= y && particleZ < z) { // Far North West
+				particlesFNW.add(particle);
+			}
+			else if (particleX < x && particleY < y && particleZ >= z) { // Near South West
+				particlesNSW.add(particle);
+			}
+			else if (particleX >= x && particleY < y && particleZ >= z) { // Near South East
+				particlesNSE.add(particle);
+			}
+			else if (particleX >= x && particleY >= y && particleZ >= z) { // Near North East
+				particlesNNE.add(particle);
+			}
+			else if (particleX < x && particleY >= y && particleZ >= z) { // Near North West
+				particlesNNW.add(particle);
+			}
+			else {
+				System.out.println("Unsorted particle!");
+			}
+		}
+
+		positionNNW = new Vector3D(x - (width / 4.), y + (width / 4.), z + (width / 4.));
+		positionNNE = new Vector3D(x + (width / 4.), y + (width / 4.), z + (width / 4.));
+		positionNSW = new Vector3D(x - (width / 4.), y - (width / 4.), z + (width / 4.));
+		positionNSE = new Vector3D(x + (width / 4.), y - (width / 4.), z + (width / 4.));
+		positionFNW = new Vector3D(x - (width / 4.), y + (width / 4.), z - (width / 4.));
+		positionFNE = new Vector3D(x + (width / 4.), y + (width / 4.), z - (width / 4.));
+		positionFSW = new Vector3D(x - (width / 4.), y - (width / 4.), z - (width / 4.));
+		positionFSE = new Vector3D(x + (width / 4.), y - (width / 4.), z - (width / 4.));
+		
+		NNW = new OctNode(positionNNW, this.width / 2., theta, particlesNNW);
+		NNE = new OctNode(positionNNE, this.width / 2., theta, particlesNNE);
+		NSW = new OctNode(positionNSW, this.width / 2., theta, particlesNSW);
+		NSE = new OctNode(positionNSE, this.width / 2., theta, particlesNSE);
+		FNW = new OctNode(positionFNW, this.width / 2., theta, particlesFNW);
+		FNE = new OctNode(positionFNE, this.width / 2., theta, particlesFNE);
+		FSW = new OctNode(positionFSW, this.width / 2., theta, particlesFSW);
+		FSE = new OctNode(positionFSE, this.width / 2., theta, particlesFSE);
+	}
+	
+	public ArrayList<Particle> reducedParticles(Vector3D position) {
+		ArrayList<Particle> reduced;
+		double distance;
+
+		reduced = new ArrayList<Particle>();
+		
+		if (particles.size() == 0)
+			return reduced;
+		
+		if (particles.size() == 1)
+			return particles;
+		
+		distance = this.position.subtract(position).getNorm();
+		
+		if (width / distance < theta) {
+			reduced.add(new Particle(this.position, this.mass));
+			return reduced;
+		}
+
+		reduced.addAll(NNW.reducedParticles(position));
+		reduced.addAll(NNE.reducedParticles(position));
+		reduced.addAll(NSW.reducedParticles(position));
+		reduced.addAll(NSE.reducedParticles(position));
+		reduced.addAll(FNW.reducedParticles(position));
+		reduced.addAll(FNE.reducedParticles(position));
+		reduced.addAll(FSW.reducedParticles(position));
+		reduced.addAll(FSE.reducedParticles(position));
+		
+		return reduced;
+			
+	}
+	
+	private void centerOfMass() {
+		
+		if (particles.size() == 0) {
+			centerOfMass = position;
+		}
+		
+		for (Particle particle : particles) {
+			
+		}
+	}
+	
+	public double getX() {
+		return position.getX();
+	}
+	
+	public double getY() {
+		return position.getY();
+	}
+	
+	public double getZ() {
+		return position.getZ();
+	}
+	
+	public double getWidth() {
+		return width;
+	}
+	
+	public OctNode getNNW() {
+		return NNW;
+	}
+	
+	public OctNode getNNE() {
+		return NNE;
+	}
+	
+	public OctNode getNSW() {
+		return NSW;
+	}
+	
+	public OctNode getNSE() {
+		return NSE;
+	}
+	
+	public OctNode getFNW() {
+		return FNW;
+	}
+	
+	public OctNode getFNE() {
+		return FNE;
+	}
+	
+	public OctNode getFSW() {
+		return FSW;
+	}
+	
+	public OctNode getFSE() {
+		return FSE;
+	}
+	
+	public double getMass() {
+		return this.mass;
+	}
+}

@@ -11,22 +11,22 @@ public class GalaxyMerger {
 	private static final double SOLAR_SYSTEM_WIDTH = 1920;
 	private static final double SOLAR_SYSTEM_HEIGHT = 1080;
 
-	private static final Vector3D MILKYWAY_POSITION = new Vector3D(-600, 300, 400);
+	private static final Vector3D MILKYWAY_POSITION = new Vector3D(0, 0, 0);
 	private static final Vector3D MILKYWAY_VELOCITY = new Vector3D(0, 0, 0);
-	private static final double MILKYWAY_MASS = 4310000;
-	private static final double MILKYWAY_RADIUS = 20;
+	private static final double MILKYWAY_MASS = 1.5e12;//4310000;
+	private static final double MILKYWAY_RADIUS = 5;
 	private static final double MILKYWAY_DISK_RADIUS = 100;
 	private static final double[] BLACKHOLE_COLOR = {.1,.1,.1};
 
-	private static final Vector3D ANDROMEDA_POSITION = new Vector3D(700, -200, -450);
-	private static final Vector3D ANDROMEDA_VELOCITY = new Vector3D(0.1, 0, 0);
-	private static final double ANDROMEDA_MASS = 4310000;
-	private static final double ANDROMEDA_RADIUS = 20;
+	private static final Vector3D ANDROMEDA_POSITION = new Vector3D(769, .1, 0);
+	private static final Vector3D ANDROMEDA_VELOCITY = new Vector3D(-1.288e-8, 0, 0);
+	private static final double ANDROMEDA_MASS = 1.5e12;
+	private static final double ANDROMEDA_RADIUS = 5;
 	
 	
-	private static final double GRAVITATIONAL_CONSTANT = 0.00001;//0.004302;
+	private static final double GRAVITATIONAL_CONSTANT = 5.855639e-32;
 	private static final int NUM_STARS = 10;
-	private static final double TIME_STEP = 68.484; // 1/4 year per second
+	private static final double TIME_STEP = 8.776e7; //100,000 years per step
 	private static final double CONSERVATION_TOLERANCE = .01;
 	private static final double BARNS_HUT_THETA = 0;
 	private static final int MAX_STEPS = 2000;
@@ -58,7 +58,7 @@ public class GalaxyMerger {
 		carl.setParticles(particles);
 	}
 	
-	public void run() {	
+	public void run() throws Exception {	
 		Vector3D forces[];
 		int i;
 		
@@ -92,7 +92,7 @@ public class GalaxyMerger {
 			//System.out.printf("%d, %.5f\n", step, colin.energyDeviation() * 100);
 			if (!colin.energyConserved()) {
 				System.out.println("Energy Not Conserved!");
-				//break;
+				break;
 			}
 			
 			//System.out.printf("%d, %.5f\n", step, colin.linearMomentumDeviation() * 100);
@@ -124,6 +124,7 @@ public class GalaxyMerger {
 		blackHole = new Particle(MILKYWAY_POSITION, MILKYWAY_VELOCITY, MILKYWAY_MASS, MILKYWAY_RADIUS);
 		particles.add(blackHole);
 		
+		/*
 		for (int i = 0; i < NUM_STARS; i++) {
 			radius = (random.nextDouble() * 400);
 			position = randomPointOnCircle(radius);
@@ -134,7 +135,7 @@ public class GalaxyMerger {
 			
 			star = new Particle(position, velocity, 1, 10);
 			particles.add(star);
-		}
+		}*/
 	}
 	
 	private void andromeda() {
@@ -161,27 +162,6 @@ public class GalaxyMerger {
 			particles.add(star);
 		}
 		*/
-	}
-	
-	private Vector3D randomPointOnSphere(double radius) {
-		Random randomGenerator;
-		double x1, x2;
-		double x, y, z;
-		
-		randomGenerator = new Random();
-		
-		do {
-			x1 = (randomGenerator.nextDouble() * 2) - 1;
-			x2 = (randomGenerator.nextDouble() * 2) - 1;
-		}
-		while ((x1 * x1) + (x2 * x2) > 1);
-
-		x = (2. * x1) * Math.sqrt(1 - (x1 * x1) - (x2 * x2));
-		y = (2. * x2) * Math.sqrt(1 - (x1 * x1) - (x2 * x2));
-		z = 1 - (2 * ((x1 * x1) + (x2 * x2)));
-		
-		return new Vector3D(radius * x, radius * y, radius * z);
-		
 	}
 	
 	private Vector3D randomPointOnCircle(double radius) {

@@ -9,22 +9,16 @@ public abstract class NForceField {
 	protected ArrayList<Particle> particles;
 	
 	public NForceField(double forceConstant, ArrayList<Particle> particles, double theta) {
-		double width;
 		
 		this.forceConstant = forceConstant;
 		this.particles = particles;
 		
-		width = 0;
-		
-		for (Particle particle : particles) {
-			
-			if (particle.getPosition().getNorm() > width)
-				width = particle.getPosition().getNorm();
+		try {
+			this.octTree = new OctTree(theta, particles);
 		}
-		
-		width *= 2;
-		
-		this.octTree = new OctTree(width, theta, particles);
+		catch (Exception ex) {
+			System.out.println("Exception Caught while creating octtree. " + ex);
+		}
 	}
 
 	public abstract Vector3D forceOnParticle(Particle particle);

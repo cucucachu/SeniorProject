@@ -3,26 +3,26 @@
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="330" key="DIALOG_WIDTH"/>
 		<item value="256" key="DIALOG_Y_ORIGIN"/>
-		<item value="772" key="DIALOG_X_ORIGIN"/>
 		<item value="484" key="DIALOG_HEIGHT"/>
+		<item value="772" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="OctoTree" key="selection"/>
+		<item value="writer" key="selection"/>
 		<list key="findhistory">
+			<item value="frameRate"/>
+			<item value="writer"/>
 			<item value="QuadTree"/>
 			<item value="QuadNode"/>
 			<item value="ParticlesSE"/>
 			<item value="ParticlesSW"/>
 			<item value="ParticlesNE"/>
 			<item value="ParticlesNW"/>
-			<item value="carl"/>
-			<item value="scroll"/>
 		</list>
 		<list key="replacehistory">
 			<item value="OctoTree"/>

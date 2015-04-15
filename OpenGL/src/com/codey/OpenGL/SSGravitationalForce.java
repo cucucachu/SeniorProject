@@ -37,8 +37,8 @@ public class SSGravitationalForce extends NForceField {
 		return force;
 	}
 	
-	public void updateOctTree() {
-		octTree.divide();
+	public void updateOctTree() throws Exception {
+		octTree.update();
 	}
 
 }
