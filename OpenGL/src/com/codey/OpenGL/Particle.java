@@ -1,6 +1,7 @@
 package com.codey.OpenGL;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import java.awt.Color; 
 
 public class Particle {
 	private Vector3D position;
@@ -59,6 +60,12 @@ public class Particle {
 		rgb[1] = green;
 		rgb[2] = blue;
 	}
+	
+	public void setColor(Color color) {
+		this.rgb[0] = color.getRed();
+		this.rgb[1] = color.getGreen();
+		this.rgb[2] = color.getBlue();
+	}
 
 	public void setColor(double[] rgb) {
 		this.rgb[0] = rgb[0];
@@ -87,9 +94,18 @@ public class Particle {
 	}	
 	
 	public void print() {
-		System.out.println("Particle:");
-		System.out.printf("   Pos: (%.2f, %.2f)", position.getX(), position.getY());
-		System.out.printf("   Vel: (%.2f, %.2f)\n", velocity.getX(), velocity.getY());
+		System.out.printf("   Pos: (%f, %f, %f)", position.getX(), position.getY(), position.getZ());
+		System.out.printf("   Vel: (%f, %f, %f)", velocity.getX(), velocity.getY(), position.getZ());
+		System.out.printf("   Mass: %.2f   Radius %.2f   Color (%.0f, %.0f, %.0f)\n", mass, radius, rgb[0], rgb[1], rgb[2]);
+		
+	}
+	
+	public String toString() {
+		return String.format("p %.15f < %.15f %.15f %.15f > < %.15f %.15f %.15f > %.15f grey\n",
+				mass, 
+				position.getX(), position.getY(), position.getZ(),
+				velocity.getX(), velocity.getY(), velocity.getZ(), 
+				radius);
 	}
 	
 	public double getMass() {

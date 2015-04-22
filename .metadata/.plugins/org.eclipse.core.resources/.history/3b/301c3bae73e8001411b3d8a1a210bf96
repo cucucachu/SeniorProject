@@ -1,0 +1,11 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+
+public class Simulation {
+	
+	public Simulation(File inputFile) {
+		
+	}
+
+}

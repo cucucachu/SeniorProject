@@ -1,0 +1,39 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+import java.util.ArrayList;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class Simulation {
+	private Painter picaso;
+	private CameraMan carl;
+	private Conservationist colin;
+	
+	public ArrayList<Particle> particles;
+	private Vector3D stars[];
+	public SSGravitationalForce gravity;
+	private static int step = 0;
+	
+	private double gravitationalConstant;
+	private boolean showOctTree;
+	private int timeStep;
+	private double conservationTolerance;
+	private boolean breakOnEnergyNotConserved;
+	private boolean outputConservationInfo;
+	private double barnesHutTheta;
+	private int maxStep;
+	
+	public Simulation(File inputFile) {
+		readInputFile(inputFile);
+		
+		printInput();
+	}
+	
+	private void readInputFile(inputFile) {
+		
+	}
+	
+	private void printInput();
+
+}

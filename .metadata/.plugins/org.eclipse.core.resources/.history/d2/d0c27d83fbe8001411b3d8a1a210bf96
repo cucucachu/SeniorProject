@@ -1,0 +1,29 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+
+public class Librarian {
+
+	private static final String path = "/home/cody/School/Senior Project/output/";
+	private static final String conservationFileName = "Conservation.csv";
+	private static final String simulationFileName   = "Simulation.sim";
+	private static final String performanceFileName  = "Performance.csv";
+	
+	private Writer conservationWriter;
+	private Writer simulationWriter;
+	private Writer performanceWriter;
+	
+	public Librarian() throws FileNotFoundException, UnsupportedEncodingException {
+		File conservationFile = new File(path + conservationFileName);
+		File simulationFile = new File(path + simulationFileName);
+		File performanceFile = new File(path + performanceFileName);
+
+		conservationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(conservationFile), "UTF-8"));
+		simulationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(simulationFile), "UTF-8"));
+		performanceWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(performanceFile), "UTF-8"));
+	}
+	
+	public void janitor() {
+		conservationWriter.close();
+	}
+}

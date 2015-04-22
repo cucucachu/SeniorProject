@@ -1,0 +1,80 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+import java.util.ArrayList;
+
+public class Librarian {
+
+	private static final String path = "/home/cody/School/Senior Project/output/";
+	private static final String conservationFileName = "Conservation.csv";
+	private static final String simulationFileName   = "Simulation.sim";
+	private static final String performanceFileName  = "Performance.csv";
+	
+	private Writer conservationWriter;
+	private Writer simulationWriter;
+	private Writer performanceWriter;
+	
+	private ArrayList<Particle> particles;
+	private Conservationist colin;
+	
+	private long lastTime;
+	
+	
+	public Librarian(ArrayList<Particle> particles, Conservationist colin) 
+		throws FileNotFoundException, UnsupportedEncodingException {
+		
+		this.particles = particles;
+		this.colin = colin;
+		
+		File conservationFile = new File(path + conservationFileName);
+		File simulationFile = new File(path + simulationFileName);
+		File performanceFile = new File(path + performanceFileName);
+		
+		lastTime = System.nanoTime();
+
+		conservationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(conservationFile), "UTF-8"));
+		simulationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(simulationFile), "UTF-8"));
+		performanceWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(performanceFile), "UTF-8"));
+	}
+	
+	public void recordSimulation(String optionsString) throws IOException {
+		simulationWriter.write(optionsString);
+		
+		for (Particle particle : particles)
+			simulationWriter.write(particle.toString());
+	}
+	
+	public void recordPerformance(int step) throws IOException {
+		long now;
+		
+		now = System.nanoTime();
+		
+		if (step == 0) {
+			performanceWriter.write("Step, Time since last step (ns) \n");
+			performanceWriter.write("0, 0\n");
+		}
+		else 
+			performanceWriter.write(String.format("%d, %d\n", step, now - lastTime));
+			
+		lastTime = now;
+	}
+	
+	public void recordConservation(int step) throws IOException {
+		
+		if (step == 0)
+			conservationWriter.write("Step, Energy, Linear Momentum, Angular Momentum\n");
+		
+
+		conservationWriter.write(String.format("%d", step));
+		conservationWriter.write(String.format(", %f", colin.energyDeviation() * 100));
+		conservationWriter.write(String.format(", %f", colin.linearMomentumDeviation() * 100));
+		conservationWriter.write(String.format(",  %f", colin.angularMomentumDeviation() * 100));
+		conservationWriter.write("\n");
+	}
+	
+	public void janitor() throws IOException {
+		conservationWriter.close();
+		simulationWriter.close();
+		performanceWriter.close();
+	}
+}

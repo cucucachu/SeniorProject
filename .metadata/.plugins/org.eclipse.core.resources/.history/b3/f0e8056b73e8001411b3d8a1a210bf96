@@ -1,0 +1,9 @@
+package com.codey.OpenGL;
+
+public class Simulation {
+	
+	public Simulation(FILE inputFile) {
+		
+	}
+
+}

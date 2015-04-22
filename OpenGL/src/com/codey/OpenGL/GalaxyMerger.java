@@ -13,22 +13,24 @@ public class GalaxyMerger {
 
 	private static final Vector3D MILKYWAY_POSITION = new Vector3D(0, 0, 0);
 	private static final Vector3D MILKYWAY_VELOCITY = new Vector3D(0, 0, 0);
-	private static final double MILKYWAY_MASS = 1.5e12;//4310000;
+	private static final double MILKYWAY_MASS = 100;//1.5e12;//4310000;
 	private static final double MILKYWAY_RADIUS = 5;
-	private static final double MILKYWAY_DISK_RADIUS = 100;
+	private static final double MILKYWAY_DISK_RADIUS = 50;
 	private static final double[] BLACKHOLE_COLOR = {.1,.1,.1};
 
-	private static final Vector3D ANDROMEDA_POSITION = new Vector3D(769, .1, 0);
-	private static final Vector3D ANDROMEDA_VELOCITY = new Vector3D(-1.288e-8, 0, 0);
-	private static final double ANDROMEDA_MASS = 1.5e12;
+	private static final Vector3D ANDROMEDA_POSITION = new Vector3D(-75, 55, 0);
+	private static final Vector3D ANDROMEDA_VELOCITY = new Vector3D(37, 0, 0);
+	private static final double ANDROMEDA_MASS = 100;
 	private static final double ANDROMEDA_RADIUS = 5;
+	private static final double ANDROMEDA_DISK_RADIUS = 50;
 	
 	
-	private static final double GRAVITATIONAL_CONSTANT = 5.855639e-32;
-	private static final int NUM_STARS = 10;
-	private static final double TIME_STEP = 8.776e7; //100,000 years per step
-	private static final double CONSERVATION_TOLERANCE = .01;
-	private static final double BARNS_HUT_THETA = 0;
+	private static final boolean SHOW_OCTTREE = false;
+	private static final double GRAVITATIONAL_CONSTANT = 449.93;//5.855639e-32;
+	private static final int NUM_STARS = 100;
+	private static final double TIME_STEP = .01;//8.776e7; //100,000 years per step
+	private static final double CONSERVATION_TOLERANCE = 1;
+	private static final double BARNS_HUT_THETA = .5;
 	private static final int MAX_STEPS = 2000;
 	
 	private Painter picaso;
@@ -85,14 +87,15 @@ public class GalaxyMerger {
 			
 			gravity.updateOctTree();
 			
-			picaso.drawOctTree(gravity.getOctTree().getRoot());
+			if (SHOW_OCTTREE)
+				picaso.drawOctTree(gravity.getOctTree().getRoot());
 			
 			picaso.render();
 			
 			//System.out.printf("%d, %.5f\n", step, colin.energyDeviation() * 100);
 			if (!colin.energyConserved()) {
 				System.out.println("Energy Not Conserved!");
-				break;
+				//break;
 			}
 			
 			//System.out.printf("%d, %.5f\n", step, colin.linearMomentumDeviation() * 100);
@@ -123,19 +126,20 @@ public class GalaxyMerger {
 		
 		blackHole = new Particle(MILKYWAY_POSITION, MILKYWAY_VELOCITY, MILKYWAY_MASS, MILKYWAY_RADIUS);
 		particles.add(blackHole);
+		System.out.print(blackHole);
 		
-		/*
 		for (int i = 0; i < NUM_STARS; i++) {
-			radius = (random.nextDouble() * 400);
+			radius = (random.nextDouble() * MILKYWAY_DISK_RADIUS);
 			position = randomPointOnCircle(radius);
-			velocity = velocityVector(position, 10);
+			velocity = velocityVector(position, Math.sqrt(GRAVITATIONAL_CONSTANT * MILKYWAY_MASS / radius));
 			
 			position = position.add(MILKYWAY_POSITION);
 			velocity = velocity.add(MILKYWAY_VELOCITY);
 			
-			star = new Particle(position, velocity, 1, 10);
+			star = new Particle(position, velocity, 1, 1);
 			particles.add(star);
-		}*/
+			System.out.print(star);
+		}
 	}
 	
 	private void andromeda() {
@@ -148,33 +152,34 @@ public class GalaxyMerger {
 		
 		blackHole = new Particle(ANDROMEDA_POSITION, ANDROMEDA_VELOCITY, ANDROMEDA_MASS, ANDROMEDA_RADIUS);
 		particles.add(blackHole);
-		
-		/*
+		System.out.print(blackHole);
+
 		for (int i = 0; i < NUM_STARS; i++) {
-			radius = (random.nextDouble() * MILKYWAY_DISK_RADIUS);
+			radius = (random.nextDouble() * ANDROMEDA_DISK_RADIUS);
 			position = randomPointOnCircle(radius);
-			velocity = velocityVector(position, 1);
+			velocity = velocityVector(position, Math.sqrt(GRAVITATIONAL_CONSTANT * ANDROMEDA_MASS / radius));
 			
 			position = position.add(ANDROMEDA_POSITION);
 			velocity = velocity.add(ANDROMEDA_VELOCITY);
 			
-			star = new Particle(position, velocity, 1, radius);
+			star = new Particle(position, velocity, 1, 1);
 			particles.add(star);
+			System.out.print(star);
 		}
-		*/
 	}
 	
 	private Vector3D randomPointOnCircle(double radius) {
 		Random randomGenerator;
-		double theta, x, y;
+		double theta, x, y, z;
 		
 		randomGenerator = new Random();
 		
 		theta = 2 * Math.PI * randomGenerator.nextDouble();
 		x = radius * Math.cos(theta);
 		y = radius * Math.sin(theta);
+		z = y * Math.cos(Math.PI / 4);
 		
-		return new Vector3D(x, y, 0.0);
+		return new Vector3D(x, y, z);
 	}
 	
 	private Vector3D velocityVector(Vector3D position, double velocity) {

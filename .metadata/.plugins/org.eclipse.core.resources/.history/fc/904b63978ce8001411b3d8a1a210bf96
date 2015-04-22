@@ -1,0 +1,128 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class Simulation {
+	private Painter picaso;
+	private CameraMan carl;
+	private Conservationist colin;
+	
+	public ArrayList<Particle> particles;
+	private Vector3D stars[];
+	public SSGravitationalForce gravity;
+	private static int step = 0;
+	
+	private double gravitationalConstant;
+	private double conservationTolerance;
+	private double barnesHutTheta;
+	private int timeStep;
+	private int maxStep;
+	private boolean showOctTree;
+	private boolean breakOnEnergyNotConserved;
+	private boolean outputConservationInfo;
+	
+	public Simulation(File inputFile) throws SimulationException {
+		readInputFile(inputFile);
+		
+		printInput();
+	}
+	
+	private void readInputFile(File inputFile) throws SimulationException {
+		Scanner scanner;
+		String input;
+		
+		System.out.println("Reading input...");
+
+		try {
+			scanner = new Scanner(inputFile);
+			
+			if (!scanner.hasNext())
+				throw new SimulationException("Input file is empty");
+			
+			input = scanner.next();
+
+			if (input.compareTo("Gravitational_Constant:") != 0)
+				throw new SimulationException("Could not locate string Gravitational_Constant:");
+			
+			gravitationalConstant = new Double(scanner.next());
+
+			input = scanner.next();
+			if (input.compareTo("Conservation_Tolerance:") != 0)
+				throw new SimulationException("Could not locate string Conservation_Tolerance:");
+			
+			conservationTolerance = new Double(scanner.next());
+
+			input = scanner.next();
+			if (input.compareTo("Barnes_Hut_Theta:") != 0)
+				throw new SimulationException("Could not locate string Barnes_Hut_Theta:");
+			
+			barnesHutTheta = new Double(scanner.next());
+
+			input = scanner.next();
+			if (input.compareTo("Time_Step:") != 0)
+				throw new SimulationException("Could not locate string Time_Step:");
+			
+			timeStep = new Integer(scanner.next());
+
+			input = scanner.next();
+			if (input.compareTo("Max_Step:") != 0)
+				throw new SimulationException("Could not locate string Max_Step:");
+			
+			maxStep = new Integer(scanner.next());
+
+			input = scanner.next();
+			if (input.compareTo("Show_Oct_Tree:") != 0)
+				throw new SimulationException("Could not locate string Show_Oct_Tree:");
+			
+			if (scanner.next().toLowerCase().charAt(0) == 't')
+				showOctTree = true;
+			else
+				showOctTree = false;
+
+			input = scanner.next();
+			if (input.compareTo("Strict_Conversion:") != 0)
+				throw new SimulationException("Could not locate string Strict_Conversion:");
+			
+			if (scanner.next().toLowerCase().charAt(0) == 't')
+				breakOnEnergyNotConserved = true;
+			else
+				breakOnEnergyNotConserved = false;
+
+			input = scanner.next();
+			if (input.compareTo("Output_Conversion_Info:") != 0)
+				throw new SimulationException("Could not locate string Output_Conversion_Info:");
+			
+			if (scanner.next().toLowerCase().charAt(0) == 't')
+				outputConservationInfo = true;
+			else
+				outputConservationInfo = false;
+		}
+		catch (Exception ex) {
+			throw new SimulationException(ex.getMessage());
+		}
+		
+		System.out.println("Done reading input.");
+		
+	}
+	
+	private void readParticle() {
+		
+	}
+	
+	private void printInput() {
+		System.out.println("Starting simulation with the following parameters...");
+		System.out.printf("Gravitational Constant:  %f\n", gravitationalConstant);
+		System.out.printf("Conservation Tolerance:  %f\n", conservationTolerance);
+		System.out.printf("Barnes Hut Theta:        %f\n", barnesHutTheta);
+		System.out.printf("Time Step:               %d\n", timeStep);
+		System.out.printf("Max Step                 %d\n", maxStep);
+		System.out.printf("Show Oct Tree            " + showOctTree);
+		System.out.printf("Strict Conservation      " + breakOnEnergyNotConserved);
+		System.out.printf("Output Conservation Info " + outputConservationInfo);
+	}
+
+}

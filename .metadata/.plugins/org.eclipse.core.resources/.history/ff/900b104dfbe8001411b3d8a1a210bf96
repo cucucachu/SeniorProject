@@ -1,0 +1,21 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+
+public class Librarian {
+
+	private static final String path = "/home/cody/School/Senior Project/output/";
+	private static final String conservationFileName = "Conservation.csv";
+	private static final String simulationFileName   = "Simulation.sim";
+	private static final String performanceFileName  = "Performance.csv";
+	
+	private Writer conservationWriter;
+	private Writer simulationWriter;
+	private Writer performanceWriter;
+	
+	public Librarian() {
+		File conservationFile = new File(path + conservationFileName);
+		
+		conservationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(csv, false), "UTF-8"))
+	}
+}

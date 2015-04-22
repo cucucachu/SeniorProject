@@ -1,0 +1,18 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+
+public class Librarian {
+
+	private static final String conservationFileName = "/home/cody/School/Senior Project/python/SolarSystemConservation(theta=0).csv";
+	private static final String simulationFileName   = "";
+	private static final String performanceFileName  = "";
+	
+	private Writer conservationWriter;
+	private Writer simulationWriter;
+	private Writer performanceWriter;
+	
+	public Librarian() {
+		conservationWriter = new 
+	}
+}

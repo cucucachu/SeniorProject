@@ -113,6 +113,7 @@ public class SolarSystem {
 								new Vector3D(0, 0, 0), SUN_MASS, SUN_RADIUS);
 		particle.setColor(SUN_COLOR);
 		particles.add(particle);
+		particle.print();
 		
 		//MERCURY
 		position = randomPointOnCircle(MERCURY_DISTANCE);
@@ -121,6 +122,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, MERCURY_RADIUS);
 		particle.setColor(MERCURY_COLOR);
 		particles.add(particle);	
+		particle.print();
 		
 		//VENUS
 		position = randomPointOnCircle(VENUS_DISTANCE);
@@ -129,6 +131,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, VENUS_RADIUS);
 		particle.setColor(VENUS_COLOR);
 		particles.add(particle);	
+		particle.print();
 		
 		//EARTH
 		position = randomPointOnCircle(EARTH_DISTANCE);
@@ -137,6 +140,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, EARTH_RADIUS);
 		particle.setColor(EARTH_COLOR);
 		particles.add(particle);
+		particle.print();
 		
 		//LUNA
 		position = randomPointOnCircle(MOON_DISTANCE);
@@ -146,6 +150,7 @@ public class SolarSystem {
 		moon = new Particle(position, velocity, mass, MOON_RADIUS);
 		moon.setColor(MOON_COLOR);
 		particles.add(moon);
+		particle.print();
 		
 		//MARS
 		position = randomPointOnCircle(MARS_DISTANCE);
@@ -154,6 +159,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, MARS_RADIUS);
 		particle.setColor(MARS_COLOR);
 		particles.add(particle);
+		particle.print();
 		
 		//JUPITER
 		position = randomPointOnCircle(JUPITER_DISTANCE);
@@ -162,6 +168,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, JUPITER_RADIUS);
 		particle.setColor(JUPITER_COLOR);
 		particles.add(particle);	
+		particle.print();
 		
 		//SATURN
 		position = randomPointOnCircle(SATURN_DISTANCE);
@@ -170,6 +177,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, SATURN_RADIUS);
 		particle.setColor(SATURN_COLOR);
 		particles.add(particle);	
+		particle.print();
 		
 		//NEPTUNE
 		position = randomPointOnCircle(NEPTUNE_DISTANCE);
@@ -178,6 +186,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, NEPTUNE_RADIUS);
 		particle.setColor(NEPTUNE_COLOR);
 		particles.add(particle);	
+		particle.print();
 		
 		//URANUS
 		position = randomPointOnCircle(URANUS_DISTANCE);
@@ -186,6 +195,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, URANUS_RADIUS);
 		particle.setColor(URANUS_COLOR);
 		particles.add(particle);		
+		particle.print();
 		
 		//PLUTO
 		position = randomPointOnCircle(PLUTO_DISTANCE);
@@ -194,6 +204,7 @@ public class SolarSystem {
 		particle = new Particle(position, velocity, mass, PLUTO_RADIUS);
 		particle.setColor(PLUTO_COLOR);
 		particles.add(particle);	
+		particle.print();
 
 		colin = new Conservationist(particles, CONSERVATION_TOLERANCE, GRAVITATIONAL_CONSTANT);
 		gravity = new SSGravitationalForce(GRAVITATIONAL_CONSTANT, particles, BARNS_HUT_THETA);
@@ -252,21 +263,21 @@ public class SolarSystem {
 			writer.write(String.format(", %f", colin.energyDeviation() * 100));
 			System.out.printf(", %f", colin.energyDeviation() * 100);
 			if (!colin.energyConserved()) {
-				//System.out.println("Energy Not Conserved!");
+				System.out.println("Energy Not Conserved!");
 				//break;
 			}
 			
 			writer.write(String.format(", %f", colin.linearMomentumDeviation() * 100));
 			System.out.printf(", %f", colin.linearMomentumDeviation() * 100);
 			if (!colin.linearMomentumConserved()) {
-				//System.out.println("Linear Momentum Not Conserved!");
+				System.out.println("Linear Momentum Not Conserved!");
 				//break;
 			}
 			
 			writer.write(String.format(",  %f", colin.angularMomentumDeviation() * 100));
 			System.out.printf(", %f", colin.angularMomentumDeviation() * 100);
 			if (!colin.angularMomentumConserved()) {
-				//System.out.println("Angular Momentum Not Conserved!");
+				System.out.println("Angular Momentum Not Conserved!");
 				//break;
 			}
 			

@@ -1,0 +1,14 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+
+public class Librarian {
+	
+	private Writer conservationWriter;
+	private Writer simulationWriter;
+	private Writer performanceWriter;
+	
+	public Librarian() {
+		
+	}
+}

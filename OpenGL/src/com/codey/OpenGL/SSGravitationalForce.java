@@ -20,19 +20,20 @@ public class SSGravitationalForce extends NForceField {
 		force = Vector3D.ZERO;
 		
 		for (Particle other : reducedParticles) {
-			if (!other.equals(particle)) {
 				r = other.getPosition().subtract(particle.getPosition());
-				magnitude = r.getNorm();
 				
-				if (!r.equals(Vector3D.ZERO))
-					r = r.normalize();
+				if (r.equals(Vector3D.ZERO))
+					continue;
+
+				magnitude = r.getNorm();
+				r = r.normalize();
 				
 				
 				force = force.add(
 						r.scalarMultiply(
 						other.getMass() * forceConstant / (magnitude * magnitude))
 						);
-			}
+			
 		}
 		return force;
 	}

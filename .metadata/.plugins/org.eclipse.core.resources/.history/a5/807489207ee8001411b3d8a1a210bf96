@@ -1,0 +1,58 @@
+package com.codey.OpenGL;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+
+public class Simulation {
+	private Painter picaso;
+	private CameraMan carl;
+	private Conservationist colin;
+	
+	public ArrayList<Particle> particles;
+	private Vector3D stars[];
+	public SSGravitationalForce gravity;
+	private static int step = 0;
+	
+	private double gravitationalConstant;
+	private double conservationTolerance;
+	private double barnesHutTheta;
+	private int timeStep;
+	private int maxStep;
+	private boolean showOctTree;
+	private boolean breakOnEnergyNotConserved;
+	private boolean outputConservationInfo;
+	
+	public Simulation(File inputFile) throws SimulationException, FileNotFoundException {
+		readInputFile(inputFile);
+		
+		printInput();
+	}
+	
+	private void readInputFile(File inputFile) throws SimulationException, FileNotFoundException {
+		Scanner scanner;
+		String input;
+		
+		scanner = new Scanner(inputFile);
+		
+		input = scanner.next();
+		
+		if (input.compareTo("Gravitational_Constant:") == 0)
+			gravitationalConstant = new Double(scanner.next());
+	}
+	
+	private void printInput() {
+		System.out.println("Starting simulation with the following parameters...");
+		System.out.printf("Gravitational Constant:  %f\n", gravitationalConstant);
+		System.out.printf("Conservation Tolerance:  %f\n", conservationTolerance);
+		System.out.printf("Barnes Hut Theta:        %f\n", barnesHutTheta);
+		System.out.printf("Time Step:               %d\n", timeStep);
+		System.out.printf("Max Step                 %d\n", maxStep);
+		System.out.printf("Show Oct Tree            " + showOctTree);
+		System.out.printf("Strict Conservation      " + breakOnEnergyNotConserved);
+		System.out.printf("Output Conservation Info " + outputConservationInfo);
+	}
+
+}
