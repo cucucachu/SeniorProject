@@ -32,30 +32,10 @@ public class Launcher {
 	public static void launch() throws LWJGLException, Exception {
 
 		LibraryLoader.loadNativeLibrary();
-		
-		  /*
-		 
-		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
-		carl = new CameraMan();
-		solarSystem = new SolarSystem(picaso, carl);
-		try {
-			solarSystem.run();
-		}
-		catch (Exception ex) {
-			System.out.println("Caught exception: " + ex);
-		}
-		picaso.janitor();
-		
-		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
-		carl = new CameraMan();
-		galaxyMerger = new GalaxyMerger(picaso, carl);
-		galaxyMerger.run();
-		picaso.janitor();
 
-		*/
-		//simulation = new Simulation(new File("/home/cody/School/Senior Project/SolarSystem.sim"));
-		//simulation = new Simulation(new File("/home/cody/School/Senior Project/output/Simulation.sim"));
-		simulation = new Simulation(new File("/home/cody/School/Senior Project/GalaxyMerger.sim"));
+		simulation = new Simulation(new File("/home/cody/School/SeniorProject/GalaxyMerger.sim"));
+		//simulation = new Simulation(new File("/home/cody/School/SeniorProject/SolarSystem.sim"));
+		//simulation = new Simulation(new File("/home/cody/School/SeniorProject/output/Simulation_2015_04_28_17_18_36.sim"));
 		
 	}
 }

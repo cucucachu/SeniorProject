@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="19" version="2.0">
+<workbench progressCount="16" version="2.0">
 <workbenchAdvisor/>
-<window height="1028" maximized="true" width="927" x="55" y="14">
+<window height="1056" maximized="true" width="927" x="65" y="24">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -19,6 +19,7 @@
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="232" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="org.eclipse.jdt.ui.ClassFileEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.ClassFileEditorNoSource" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.ui.DefaultTextEditor" itemType="typePlaceholder" x="-1" y="-1"/>
@@ -32,58 +33,38 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="4"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
-<part id="4"/>
 <part id="5"/>
-<part id="6"/>
-<part id="7"/>
-<part id="8"/>
-<part id="9"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Launcher.java" partName="Launcher.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/Launcher.java" title="Launcher.java" tooltip="OpenGL/src/com/codey/OpenGL/Launcher.java" workbook="DefaultEditorWorkbook">
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Launcher.java" partName="Launcher.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/Launcher.java" title="Launcher.java" tooltip="OpenGL/src/com/codey/OpenGL/Launcher.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/Launcher.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1584" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Painter.java" partName="Painter.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/Painter.java" title="Painter.java" tooltip="OpenGL/src/com/codey/OpenGL/Painter.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/Painter.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5324" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="806" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="CameraMan.java" partName="CameraMan.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/CameraMan.java" title="CameraMan.java" tooltip="OpenGL/src/com/codey/OpenGL/CameraMan.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/CameraMan.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="752" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2041" selectionTopPixel="675"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Particle.java" partName="Particle.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/Particle.java" title="Particle.java" tooltip="OpenGL/src/com/codey/OpenGL/Particle.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/Particle.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="287"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SolarSystem.java" partName="SolarSystem.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/SolarSystem.java" title="SolarSystem.java" tooltip="OpenGL/src/com/codey/OpenGL/SolarSystem.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/SolarSystem.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="5733" selectionTopPixel="1893"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GalaxyMerger.java" partName="GalaxyMerger.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/GalaxyMerger.java" title="GalaxyMerger.java" tooltip="OpenGL/src/com/codey/OpenGL/GalaxyMerger.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/GalaxyMerger.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2841" selectionTopPixel="1680"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="NForceField.java" partName="NForceField.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/NForceField.java" title="NForceField.java" tooltip="OpenGL/src/com/codey/OpenGL/NForceField.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/NForceField.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="466" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SSGravitationalForce.java" partName="SSGravitationalForce.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/SSGravitationalForce.java" title="SSGravitationalForce.java" tooltip="OpenGL/src/com/codey/OpenGL/SSGravitationalForce.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/SSGravitationalForce.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1117" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1376" selectionTopPixel="479"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OctTree.java" partName="OctTree.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/OctTree.java" title="OctTree.java" tooltip="OpenGL/src/com/codey/OpenGL/OctTree.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/OctTree.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="960" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OctNode.java" partName="OctNode.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/OctNode.java" title="OctNode.java" tooltip="OpenGL/src/com/codey/OpenGL/OctNode.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/OctNode.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Simulation.java" partName="Simulation.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/Simulation.java" title="Simulation.java" tooltip="OpenGL/src/com/codey/OpenGL/Simulation.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/Simulation.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2961" selectionTopPixel="1463"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Librarian.java" partName="Librarian.java" path="/home/cody/eclipse/OpenGL/src/com/codey/OpenGL/Librarian.java" title="Librarian.java" tooltip="OpenGL/src/com/codey/OpenGL/Librarian.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/OpenGL/src/com/codey/OpenGL/Librarian.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1179" selectionTopPixel="191"/>
 </editor>
 </editors>
 <views>
@@ -242,7 +223,7 @@
 <view id="org.eclipse.ui.views.ProblemView" ratio="0.29989764"/>
 <view id="org.eclipse.jdt.ui.JavadocView" ratio="0.3"/>
 <view id="org.eclipse.jdt.ui.SourceView" ratio="0.3"/>
-<view id="org.eclipse.ui.console.ConsoleView" ratio="0.29989764"/>
+<view id="org.eclipse.ui.console.ConsoleView" ratio="0.23132037"/>
 </fastViews>
 </fastViewBar>
 </fastViewBars>
@@ -296,168 +277,164 @@
 <workingSets/>
 <navigationHistory>
 <editors>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Simulation.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Launcher.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/SolarSystem.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Painter.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Launcher.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/GalaxyMerger.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/SolarSystem.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Launcher.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/NForceField.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/SSGravitationalForce.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/OctTree.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/OctNode.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Librarian.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/CameraMan.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Particle.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Particle.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Launcher.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/OpenGL/src/com/codey/OpenGL/Librarian.java"/>
 </editors>
-<item historyLabel="Launcher.java" index="0">
-<position info="not_deleted" x="1373" y="10"/>
+<item historyLabel="CameraMan.java" index="3">
+<position info="not_deleted" x="1024" y="12"/>
 </item>
-<item historyLabel="SolarSystem.java" index="1">
-<position info="not_deleted" x="7740" y="0"/>
-</item>
-<item historyLabel="SolarSystem.java" index="1">
-<position info="not_deleted" x="8935" y="0"/>
-</item>
-<item historyLabel="SolarSystem.java" index="1">
-<position info="not_deleted" x="9183" y="0"/>
-</item>
-<item historyLabel="SolarSystem.java" index="1">
-<position info="not_deleted" x="9412" y="0"/>
-</item>
-<item historyLabel="SolarSystem.java" index="1">
-<position info="not_deleted" x="8820" y="0"/>
-</item>
-<item historyLabel="Painter.java" index="2">
-<position info="not_deleted" x="4325" y="0"/>
-</item>
-<item historyLabel="Launcher.java" index="3">
-<position info="not_deleted" x="1373" y="10"/>
-</item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="3410" y="0"/>
-</item>
-<item historyLabel="Launcher.java" index="3">
-<position info="not_deleted" x="1373" y="10"/>
-</item>
-<item historyLabel="SolarSystem.java" index="1">
-<position info="not_deleted" x="3986" y="0"/>
-</item>
-<item historyLabel="Painter.java" index="2">
-<position info="not_deleted" x="5324" y="0"/>
-</item>
-<item historyLabel="Launcher.java" index="3">
-<position info="not_deleted" x="1373" y="10"/>
-</item>
-<item historyLabel="SolarSystem.java" index="1">
-<position info="not_deleted" x="3802" y="0"/>
-</item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="2565" y="0"/>
-</item>
-<item historyLabel="SolarSystem.java" index="1">
-<position info="not_deleted" x="3802" y="0"/>
-</item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="2565" y="0"/>
-</item>
-<item historyLabel="SolarSystem.java" index="5">
-<position info="not_deleted" x="3802" y="0"/>
-</item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="3422" y="0"/>
-</item>
-<item historyLabel="SolarSystem.java" index="5">
-<position info="not_deleted" x="5733" y="0"/>
-</item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="3422" y="0"/>
-</item>
-<item historyLabel="Launcher.java" index="6">
-<position info="not_deleted" x="1511" y="0"/>
-</item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="892" y="0"/>
-</item>
-<item historyLabel="NForceField.java" index="7">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="SSGravitationalForce.java" index="8">
-<position info="not_deleted" x="1100" y="0"/>
-</item>
-<item historyLabel="NForceField.java" index="7">
-<position info="not_deleted" x="435" y="49"/>
-</item>
-<item historyLabel="SSGravitationalForce.java" index="8">
-<position info="not_deleted" x="1120" y="0"/>
-</item>
-<item historyLabel="Launcher.java" index="6">
-<position info="not_deleted" x="1148" y="0"/>
-</item>
-<item historyLabel="SSGravitationalForce.java" index="8">
-<position info="not_deleted" x="1120" y="0"/>
-</item>
-<item historyLabel="NForceField.java" index="7">
-<position info="not_deleted" x="435" y="49"/>
-</item>
-<item historyLabel="SSGravitationalForce.java" index="8">
-<position info="not_deleted" x="1117" y="0"/>
-</item>
-<item historyLabel="OctTree.java" index="9">
-<position info="not_deleted" x="234" y="0"/>
-</item>
-<item historyLabel="OctNode.java" index="10">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="OctTree.java" index="9">
-<position info="not_deleted" x="961" y="0"/>
-</item>
-<item historyLabel="NForceField.java" index="7">
-<position info="not_deleted" x="424" y="0"/>
-</item>
-<item historyLabel="OctTree.java" index="9">
+<item historyLabel="Simulation.java" index="0">
 <position/>
 </item>
-<item historyLabel="SSGravitationalForce.java" index="8">
-<position info="not_deleted" x="1117" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="2414" y="0"/>
 </item>
-<item historyLabel="NForceField.java" index="7">
-<position info="not_deleted" x="466" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="11398" y="0"/>
 </item>
-<item historyLabel="OctTree.java" index="9">
-<position info="not_deleted" x="380" y="0"/>
+<item historyLabel="Launcher.java" index="1">
+<position/>
 </item>
-<item historyLabel="OctNode.java" index="10">
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="11398" y="0"/>
+</item>
+<item historyLabel="Launcher.java" index="1">
+<position info="not_deleted" x="852" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="12105" y="0"/>
+</item>
+<item historyLabel="Launcher.java" index="1">
+<position info="not_deleted" x="917" y="0"/>
+</item>
+<item historyLabel="Librarian.java" index="2">
+<position info="not_deleted" x="2868" y="0"/>
+</item>
+<item historyLabel="Launcher.java" index="1">
+<position info="not_deleted" x="711" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="12105" y="0"/>
+</item>
+<item historyLabel="CameraMan.java" index="3">
+<position info="not_deleted" x="187" y="33"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position/>
+</item>
+<item historyLabel="CameraMan.java" index="3">
+<position info="not_deleted" x="2065" y="36"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="2949" y="0"/>
+</item>
+<item historyLabel="Librarian.java" index="2">
+<position info="not_deleted" x="2868" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="2949" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="3054" y="0"/>
+</item>
+<item historyLabel="Launcher.java" index="1">
+<position info="not_deleted" x="711" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="11904" y="0"/>
+</item>
+<item historyLabel="CameraMan.java" index="3">
+<position info="not_deleted" x="878" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="11904" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="443" y="0"/>
+</item>
+<item historyLabel="CameraMan.java" index="3">
+<position info="not_deleted" x="2041" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="443" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="4317" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="4398" y="0"/>
+</item>
+<item historyLabel="Particle.java" index="4">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SSGravitationalForce.java" index="8">
-<position info="not_deleted" x="1117" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="5059" y="0"/>
 </item>
-<item historyLabel="NForceField.java" index="7">
-<position info="not_deleted" x="466" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="5034" y="0"/>
 </item>
-<item historyLabel="SolarSystem.java" index="5">
-<position info="not_deleted" x="5733" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="4011" y="0"/>
 </item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="892" y="0"/>
+<item historyLabel="Particle.java" index="5">
+<position info="not_deleted" x="1376" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="3404" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="5219" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="4668" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="4656" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="4660" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="4973" y="0"/>
+</item>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="5270" y="0"/>
 </item>
 <item historyLabel="Launcher.java" index="6">
-<position info="not_deleted" x="1584" y="0"/>
+<position info="not_deleted" x="713" y="0"/>
 </item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="892" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="2414" y="46"/>
 </item>
-<item historyLabel="CameraMan.java" index="11">
-<position info="not_deleted" x="752" y="0"/>
+<item historyLabel="Librarian.java" index="7">
+<position info="not_deleted" x="1179" y="0"/>
 </item>
-<item historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="809" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="1853" y="0"/>
 </item>
-<item historyLabel="OctTree.java" index="9">
-<position info="not_deleted" x="960" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position/>
 </item>
-<item active="true" historyLabel="GalaxyMerger.java" index="4">
-<position info="not_deleted" x="809" y="0"/>
+<item historyLabel="Simulation.java" index="0">
+<position info="not_deleted" x="2961" y="0"/>
+</item>
+<item active="true" historyLabel="Launcher.java" index="6">
+<position info="not_deleted" x="711" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -477,6 +454,15 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.jdt.ui.ClassFileEditorInputFactory" id="org.eclipse.jdt.ui.ClassFileEditor" name="String.class" tooltip="java.lang.String">
+<persistable org.eclipse.jdt.ui.ClassFileIdentifier="=OpenGL/\/usr\/lib\/jvm\/java-7-openjdk-amd64\/jre\/lib\/rt.jar&lt;java.lang(String.class"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Librarian.java" tooltip="OpenGL/src/com/codey/OpenGL/Librarian.java">
+<persistable path="/OpenGL/src/com/codey/OpenGL/Librarian.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Simulation.java" tooltip="OpenGL/src/com/codey/OpenGL/Simulation.java">
+<persistable path="/OpenGL/src/com/codey/OpenGL/Simulation.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="OctNode.java" tooltip="OpenGL/src/com/codey/OpenGL/OctNode.java">
 <persistable path="/OpenGL/src/com/codey/OpenGL/OctNode.java"/>
 </file>
@@ -512,15 +498,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="StaticGravitationalForce.java" tooltip="OpenGL/src/com/codey/OpenGL/StaticGravitationalForce.java">
 <persistable path="/OpenGL/src/com/codey/OpenGL/StaticGravitationalForce.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SpringForce.java" tooltip="OpenGL/src/com/codey/OpenGL/SpringForce.java">
-<persistable path="/OpenGL/src/com/codey/OpenGL/SpringForce.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GravitationalForce.java" tooltip="OpenGL/src/com/codey/OpenGL/GravitationalForce.java">
-<persistable path="/OpenGL/src/com/codey/OpenGL/GravitationalForce.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Mass.java" tooltip="OpenGL/src/com/codey/OpenGL/Mass.java">
-<persistable path="/OpenGL/src/com/codey/OpenGL/Mass.java"/>
 </file>
 </mruList>
 </workbench>

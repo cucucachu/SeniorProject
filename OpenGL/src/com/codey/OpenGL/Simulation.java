@@ -7,12 +7,14 @@ import java.awt.Color;
 
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 
 public class Simulation {
 
 	public static final int WIDTH = 1920;
 	public static final int HEIGHT = 1080;
 	public static final int FRAME_RATE = 32;
+	public static final int DEBOUNCE = 2;
 	
 	private Painter picaso;
 	private CameraMan carl;
@@ -20,18 +22,32 @@ public class Simulation {
 	private Librarian linda;
 	
 	public ArrayList<Particle> particles;
-	private Vector3D stars[];
 	public SSGravitationalForce gravity;
 	private static int step = 0;
+	
+	private static int debounce = 0;
+	boolean nonConservative = false;
+	
+	private static boolean play = true;
 	
 	private double gravitationalConstant;
 	private double conservationTolerance;
 	private double barnesHutTheta;
+	private double collisionThreshold;
 	private double timeStep;
+	
 	private int maxStep;
+	private int particleToTrack;
+	private int recurringSave;
+	
 	private boolean showOctTree;
 	private boolean breakOnEnergyNotConserved;
-	private boolean outputConservationInfo;
+	private boolean graphicsEnabled;
+
+	private String conservationFileName;
+	private String simulationFileName;
+	private String performanceFileName;
+	private boolean zipFiles;
 	
 	public Simulation(File inputFile) throws Exception {
 		particles = new ArrayList<Particle>();
@@ -45,85 +61,224 @@ public class Simulation {
 		cleanUp();
 	}
 	
+	private void setDefaults() {			
+		conservationTolerance = 1;
+		barnesHutTheta = 0;
+		collisionThreshold = 0;
+		timeStep = 1;
+		maxStep = 0;
+		recurringSave = 0;
+		particleToTrack = 0;
+		showOctTree = false;
+		breakOnEnergyNotConserved = false;
+		graphicsEnabled = false;
+		
+		conservationFileName = "none";
+		performanceFileName = "none";
+		simulationFileName = "none";
+		zipFiles = false;
+	}
+	
 	private void initialize() throws LWJGLException, FileNotFoundException, UnsupportedEncodingException {
-		picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
-		carl = new CameraMan();
 		colin = new Conservationist(particles, conservationTolerance, gravitationalConstant);
+		
 		linda = new Librarian(particles, colin);
+		linda.setConservationFileName(conservationFileName);
+		linda.setSimulationFileName(simulationFileName);
+		linda.setPerformanceFileName(performanceFileName);	
+		linda.start();
+		
+		if (graphicsEnabled) {
+			picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
+			carl = new CameraMan();
+			carl.setParticles(particles);
+			carl.track(particles.get(particleToTrack));
+		}
+		
 		gravity = new SSGravitationalForce(gravitationalConstant, particles, barnesHutTheta);
-		carl.setParticles(particles);
 	}
 	
 	private void simulate() throws Exception {	
-		Vector3D forces[];
-		int i;
-		boolean nonConservative;
-		
-		nonConservative = false;
 		
 		System.out.println("Step, Energy, Linear Momentum, Angular Momentum");
 		
-		while(!picaso.isCloseRequested() && step < maxStep) {
-			
-			picaso.checkForDisplayResize();
-			picaso.clear();
-			
-			carl.setup();
-			
-			linda.recordConservation(step);
-			linda.recordPerformance(step);
-			
-			forces = new Vector3D[particles.size()];
-			
-			i = 0;
-			for (Particle particle : particles) {
-				forces[i] = gravity.forceOnParticle(particle);
-				i++;
+		while(maxStep == 0 || step < maxStep) {
+
+			if (graphicsEnabled) {
+				if (picaso.isCloseRequested())
+					break;
+				picaso.checkForDisplayResize();
 			}
 			
-			i = 0;
-			for (Particle particle : particles) {
-				particle.step(timeStep, forces[i]);
-				picaso.drawParticle(particle);
-				i++;
+			if (play)
+				nextStep();
+
+			if (graphicsEnabled) {
+				render();
+				snapShotSave();
+				checkForPause();
 			}
 			
-			gravity.updateOctTree();
-			
-			if (showOctTree)
-				picaso.drawOctTree(gravity.getOctTree().getRoot());
-			
-			picaso.render();
-			
-			
-			if (!colin.energyConserved()) {
-				System.out.println("Energy Not Conserved!");
-				nonConservative = true;
-			}
-			
-			if (!colin.linearMomentumConserved()) {
-				System.out.println("Linear Momentum Not Conserved!");
-				nonConservative = true;
-			}
-			
-			if (!colin.angularMomentumConserved()) {
-				System.out.println("Angular Momentum Not Conserved!");
-				nonConservative = true;
-			}
-			
-			if (nonConservative && breakOnEnergyNotConserved)
+			if (!conservative())
 				break;
 			
+			if (recurringSave != 0 && step % recurringSave == 0)
+				linda.recordSimulation(optionsString());
+			
+			if (step % 100 == 0)
+				System.out.printf("Finished step %d\n", step);
+			
 			step++;
+			
 		}
 
 	}
 	
-	private void cleanUp() throws IOException {
-		linda.recordSimulation(optionsString());
-		picaso.janitor();
-		linda.janitor();
+	private void nextStep() throws Exception {
+		Vector3D forces[];
+		int i;
+		
+		linda.recordConservation(step);
+		linda.recordPerformance(step);
+		
+		forces = new Vector3D[particles.size()];
+
+		if (collisionThreshold > 0);
+			detectCollisions();
+			
+		i = 0;
+		for (Particle particle : particles) {
+			forces[i] = gravity.forceOnParticle(particle);
+			i++;
+		}
+
+		i = 0;
+		for (Particle particle : particles) {
+			particle.step(timeStep, forces[i]);
+			i++;
+		}
+		
+		gravity.updateOctTree();
+			
 	}
+	
+	private void render() {
+		int i;
+		
+		picaso.clear();
+		carl.setup();
+	
+		
+		for (Particle particle : particles)
+			picaso.drawParticle(particle);
+		
+		if (showOctTree)
+			picaso.drawOctTree(gravity.getOctTree().getRoot());
+		picaso.render();
+		
+	}
+	
+	private void detectCollisions() {
+		double distance;
+		Particle a, b;
+		
+		for (int i = 0; i < particles.size(); i++) {
+			for (int ii = i - 1; ii > 0; ii--) {
+				a = particles.get(i);
+				b = particles.get(ii);
+				distance = a.getPosition().subtract(b.getPosition()).getNorm();
+				if (Math.abs(distance) < collisionThreshold) {
+					collide(a, b);
+					i--;
+					break;
+				}
+			}
+		}
+	}
+	
+	private void collide(Particle a, Particle b) {
+		double mass;
+		double radius;
+		Vector3D position;
+		Vector3D velocity;
+		Vector3D momentumA;
+		Vector3D momentumB;
+		Particle particle;
+
+		mass = a.getMass() + b.getMass();
+		radius = Math.pow(Math.pow(a.getRadius(), 3) + Math.pow(b.getRadius(),  3), 1./3.);
+		position = a.getPosition();
+		
+		momentumA = a.getVelocity().scalarMultiply(a.getMass());
+		momentumB = b.getVelocity().scalarMultiply(b.getMass());
+		velocity = momentumA.add(momentumB).scalarMultiply(1./mass);
+		
+		System.out.println(String.format("Collision between %d and %d", particles.indexOf(a), particles.indexOf(b)));
+		System.out.printf("Va = %f\nVb = %f\nVc = %f\n", a.getVelocity().getNorm(), b.getVelocity().getNorm(), velocity.getNorm());
+		
+		particle = new Particle(position, velocity, mass, radius);
+		particle.setColor(Color.red);
+		
+		particles.add(particles.indexOf(a),particle);
+		particles.remove(a);
+		particles.remove(b);
+	}
+	
+	private boolean conservative() {
+		boolean nonConservative = false;
+		
+		if (!colin.energyConserved())
+			nonConservative = true;
+		
+		if (!colin.linearMomentumConserved())
+			nonConservative = true;
+		
+		if (!colin.angularMomentumConserved())
+			nonConservative = true;
+		
+		if (nonConservative && breakOnEnergyNotConserved)
+			return false;
+		
+		return true;
+		
+	}
+	
+	private void cleanUp() throws IOException {
+		linda.janitor();
+		
+		if (graphicsEnabled)
+			picaso.janitor();
+	}
+	/*  ------------------------------------------------------------
+	 *  Real Time Input Handlers
+	 *  ------------------------------------------------------------
+	 */
+	
+	private void snapShotSave() throws IOException {		
+		if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
+			if (debounce++ == 0)
+				linda.recordSimulation(optionsString());
+			
+			if (debounce >= DEBOUNCE)
+				debounce = 0;
+		}
+	}
+	
+	private void checkForPause() throws IOException {		
+		if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+			if (debounce++ == 0)
+				play = play ? false : true;
+			
+			if (debounce >= DEBOUNCE)
+				debounce = 0;
+		}
+	}
+	
+	/*  ------------------------------------------------------------
+	 *  Input File Reading Methods
+	 *  ------------------------------------------------------------
+	 */
+	
 	
 	private void readInputFile(File inputFile) throws SimulationException, FileNotFoundException {
 		Scanner scanner;
@@ -133,10 +288,9 @@ public class Simulation {
 		
 		scanner = new Scanner(inputFile);
 		
-		readParameters(scanner);
+		setDefaults();
 		
-		if (scanner.next().toLowerCase().compareTo("particles:") != 0)
-			throw new SimulationException("No particles given.");
+		readParameters(scanner);
 		
 		while (scanner.hasNextLine()) {
 			nextLine = scanner.nextLine();
@@ -144,78 +298,77 @@ public class Simulation {
 				readParticle(nextLine);
 		}
 
-		printInput();
+		//printInput();
 		
 	}
 	
 	private void readParameters(Scanner scanner) throws SimulationException {
 		String input;
 		
-		try {
-			
-			if (!scanner.hasNext())
-				throw new SimulationException("Input file is empty");
-			
-			input = scanner.next();
+		if (!scanner.hasNext())
+			throw new SimulationException("Input file is empty");
+		
+		input = scanner.next();
 
-			if (input.compareTo("Gravitational_Constant:") != 0)
-				throw new SimulationException("Could not locate string Gravitational_Constant:");
-			
-			gravitationalConstant = new Double(scanner.next());
+		if (input.compareTo("Gravitational_Constant:") != 0)
+			throw new SimulationException("Input file must start with string \"Gravitational_Constant:\"");
+		
+		gravitationalConstant = new Double(scanner.next());
+		
+		input = scanner.next();
+		
+		while (input.toLowerCase().compareTo("particles:") != 0) {
 
-			input = scanner.next();
-			if (input.compareTo("Conservation_Tolerance:") != 0)
-				throw new SimulationException("Could not locate string Conservation_Tolerance:");
+			if (input.charAt(0) == '#') {
+				scanner.nextLine();
+				input = scanner.next();
+				continue;
+			}
 			
-			conservationTolerance = new Double(scanner.next());
-
-			input = scanner.next();
-			if (input.compareTo("Barnes_Hut_Theta:") != 0)
-				throw new SimulationException("Could not locate string Barnes_Hut_Theta:");
-			
-			barnesHutTheta = new Double(scanner.next());
-
-			input = scanner.next();
-			if (input.compareTo("Time_Step:") != 0)
-				throw new SimulationException("Could not locate string Time_Step:");
-			
-			timeStep = new Double(scanner.next());
-
-			input = scanner.next();
-			if (input.compareTo("Max_Step:") != 0)
-				throw new SimulationException("Could not locate string Max_Step:");
-			
-			maxStep = new Integer(scanner.next());
-
-			input = scanner.next();
-			if (input.compareTo("Show_Oct_Tree:") != 0)
-				throw new SimulationException("Could not locate string Show_Oct_Tree:");
-			
-			if (scanner.next().toLowerCase().charAt(0) == 't')
-				showOctTree = true;
+			if (input.compareTo("Conservation_Tolerance:") == 0)
+				conservationTolerance = new Double(scanner.next());
+			else if (input.compareTo("Barnes_Hut_Theta:") == 0)
+				barnesHutTheta = new Double(scanner.next());
+			else if (input.compareTo("Collision_Threshold:") == 0)
+				collisionThreshold = new Double(scanner.next());
+			else if (input.compareTo("Time_Step:") == 0)
+				timeStep = new Double(scanner.next());
+			else if (input.compareTo("Max_Step:") == 0)
+				maxStep = new Integer(scanner.next());
+			else if (input.compareTo("Particle_To_Track:") == 0)
+				particleToTrack = new Integer(scanner.next());
+			else if (input.compareTo("Recurring_Save:") == 0)
+				recurringSave = new Integer(scanner.next());
+			else if (input.compareTo("Show_Oct_Tree:") == 0) {	
+				if (scanner.next().toLowerCase().charAt(0) == 't')
+					showOctTree = true;
+				else
+					showOctTree = false;
+			}
+			else if (input.compareTo("Strict_Conservation:") == 0) {
+				if (scanner.next().toLowerCase().charAt(0) == 't')
+					breakOnEnergyNotConserved = true;
+				else
+					breakOnEnergyNotConserved = false;
+			}
+			else if (input.compareTo("Graphics_Enabled:") == 0) {
+				if (scanner.next().toLowerCase().charAt(0) == 't')
+					graphicsEnabled = true;
+				else
+					graphicsEnabled = false;
+			}
+			else if (input.compareTo("Conservation_File_Path:") == 0)
+				conservationFileName = scanner.next();
+			else if (input.compareTo("Simulation_File_Path:") == 0)
+				simulationFileName = scanner.next();
+			else if (input.compareTo("Performance_File_Path:") == 0)
+				performanceFileName = scanner.next();
 			else
-				showOctTree = false;
-
-			input = scanner.next();
-			if (input.compareTo("Strict_Conservation:") != 0)
-				throw new SimulationException("Could not locate string Strict_Conservation:");
+				throw new SimulationException(
+					String.format("Bad input file format, could not match setting for string \"%s\"", input)
+				);
 			
-			if (scanner.next().toLowerCase().charAt(0) == 't')
-				breakOnEnergyNotConserved = true;
-			else
-				breakOnEnergyNotConserved = false;
-
 			input = scanner.next();
-			if (input.compareTo("Output_Conservation_Info:") != 0)
-				throw new SimulationException("Could not locate string Output_Conservation_Info:");
-			
-			if (scanner.next().toLowerCase().charAt(0) == 't')
-				outputConservationInfo = true;
-			else
-				outputConservationInfo = false;
-		}
-		catch (Exception ex) {
-			throw new SimulationException(ex.getMessage());
 		}
 	}
 	
@@ -285,22 +438,35 @@ public class Simulation {
 		particle.setColor(color);
 		
 		particles.add(particle);
-		particle.print();
+		//particle.print();
 	
 		scanner.close();
 	}
+
+	/*  ------------------------------------------------------------
+	 *  Printing Methods
+	 *  ------------------------------------------------------------
+	 */
 	
 	private String optionsString() {
 		String options = "";
 
-		options += String.format("Gravitational_Constant:  %.15f\n", gravitationalConstant);
-		options += String.format("Conservation_Tolerance:  %.15f\n", conservationTolerance);
-		options += String.format("Barnes_Hut_Theta:        %.15f\n", barnesHutTheta);
-		options += String.format("Time_Step:               %.15f\n", timeStep);
-		options += String.format("Max_Step:                 %d\n", maxStep);
-		options += "Show_Oct_Tree:            " + showOctTree + "\n";
-		options += "Strict_Conservation:      " + breakOnEnergyNotConserved + "\n";
-		options += "Output_Conservation_Info: " + outputConservationInfo + "\n\n";
+		options += String.format("Gravitational_Constant:  %.16f\n", gravitationalConstant);
+		options += String.format("Conservation_Tolerance:  %.16f\n", conservationTolerance);
+		options += String.format("Collision_Threshold:     %.16f\n", collisionThreshold);
+		options += String.format("Barnes_Hut_Theta:        %.16f\n", barnesHutTheta);
+		options += String.format("Time_Step:               %.16f\n", timeStep);
+		options += String.format("Max_Step:                %d\n", maxStep);
+		options += String.format("Particle_To_Track:       %d\n", particleToTrack);
+		options += String.format("Recurring_Save:          %d\n", recurringSave);
+		options += "Show_Oct_Tree:           " + showOctTree + "\n";
+		options += "Strict_Conservation:     " + breakOnEnergyNotConserved + "\n";
+		options += "Graphics_Enabled:        " + graphicsEnabled + "\n";
+		options += "\n";
+		options += "Conservation_File_Path:  " + conservationFileName + "\n";
+		options += "Performance_File_Path:   " + performanceFileName + "\n";
+		options += "Simulation_File_Path:    " + simulationFileName + "\n";
+		options += "\n";
 		
 		return options;
 	}
@@ -314,7 +480,6 @@ public class Simulation {
 		System.out.printf("Max_Step:                 %d\n", maxStep);
 		System.out.printf("Show_Oct_Tree:            " + showOctTree + "\n");
 		System.out.printf("Strict_Conservation:      " + breakOnEnergyNotConserved + "\n");
-		System.out.printf("Output_Conservation_Info: " + outputConservationInfo + "\n");
 		
 		if (!particles.isEmpty())
 			System.out.println("Particles");

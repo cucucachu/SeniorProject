@@ -63,7 +63,7 @@ public class CameraMan {
 		
 		if ((Keyboard.isKeyDown(Keyboard.KEY_RIGHT) || Keyboard.isKeyDown(Keyboard.KEY_D)) && debounce == 0) {
 			track(particles.get((particles.indexOf(target) + 1 ) % (particles.size()) ));
-			debounce = 8;
+			debounce = 2;
 		}
 		
 		if ((Keyboard.isKeyDown(Keyboard.KEY_LEFT) || Keyboard.isKeyDown(Keyboard.KEY_A)) && debounce == 0) {
@@ -71,7 +71,7 @@ public class CameraMan {
 				track(particles.get((particles.indexOf(target) - 1) % (particles.size()) ));
 			else 
 				track(particles.get(particles.size() - 1));
-			debounce = 8;
+			debounce = 2;
 		}
 		
 		if (debounce != 0)

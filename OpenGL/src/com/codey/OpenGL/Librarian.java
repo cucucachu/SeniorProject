@@ -1,24 +1,27 @@
 package com.codey.OpenGL;
 
 import java.io.*;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.zip.ZipOutputStream;
+import java.text.SimpleDateFormat;
 
 public class Librarian {
 
-	private static final String path = "/home/cody/School/Senior Project/output/";
-	private static final String conservationFileName = "Conservation.csv";
-	private static final String simulationFileName   = "Simulation.sim";
-	private static final String performanceFileName  = "Performance.csv";
+	private static String conservationFileName;
+	private static String simulationFileName;
+	private static String performanceFileName;
 	
 	private Writer conservationWriter;
-	private Writer simulationWriter;
 	private Writer performanceWriter;
+	private ZipOutputStream conservationZipper;
+	private ZipOutputStream performanceZipper;
 	
 	private ArrayList<Particle> particles;
 	private Conservationist colin;
 	
 	private long lastTime;
-	
+	private boolean zipFiles;
 	
 	public Librarian(ArrayList<Particle> particles, Conservationist colin) 
 		throws FileNotFoundException, UnsupportedEncodingException {
@@ -26,27 +29,79 @@ public class Librarian {
 		this.particles = particles;
 		this.colin = colin;
 		
-		File conservationFile = new File(path + conservationFileName);
-		File simulationFile = new File(path + simulationFileName);
-		File performanceFile = new File(path + performanceFileName);
-		
-		lastTime = System.nanoTime();
-
-		conservationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(conservationFile), "UTF-8"));
-		simulationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(simulationFile), "UTF-8"));
-		performanceWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(performanceFile), "UTF-8"));
+		zipFiles = false;
+		conservationWriter = null;
+		performanceWriter = null;
+		conservationZipper = null;
+		performanceZipper = null;
 	}
 	
-	public void recordSimulation(String optionsString) throws IOException {
-		simulationWriter.write(optionsString);
+	public void start() throws UnsupportedEncodingException, FileNotFoundException {
+		if (conservationFileName.toLowerCase().compareTo("none") != 0) {
+			File conservationFile = new File(addDateToFileName(conservationFileName));
+			conservationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(conservationFile), "UTF-8"));
+		}
 		
-		simulationWriter.write("Particles:\n");
-		for (Particle particle : particles)
-			simulationWriter.write(particle.toString());
+		if (performanceFileName.toLowerCase().compareTo("none") != 0) {
+			File performanceFile = new File(addDateToFileName(performanceFileName));
+			performanceWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(performanceFile), "UTF-8"));
+		}	
+		lastTime = System.nanoTime();
+		
+	}
+
+	/*  ------------------------------------------------------------
+	 *  File Name Setting Methods
+	 *  ------------------------------------------------------------
+	 */
+	
+	public void setConservationFileName(String path) {
+	    	conservationFileName = path;
+	}
+	
+	public void setPerformanceFileName(String path) {
+		performanceFileName = path;
+	}
+	
+	public void setSimulationFileName(String path) {
+		simulationFileName = path;
+	}
+	
+	public String addDateToFileName(String file) {
+		String extension = file.substring(file.indexOf('.'));
+		String name = file.substring(0, file.indexOf('.'));
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+		
+		return name + "_" + format.format(date) + extension;
+	}
+	/*  ------------------------------------------------------------
+	 *  File Writing Methods
+	 *  ------------------------------------------------------------
+	 */
+	
+	public void recordSimulation(String optionsString) throws IOException {
+		BufferedWriter simulationWriter;
+		
+		if (simulationFileName.toLowerCase().compareTo("none") != 0) {
+			File simulationFile = new File(addDateToFileName(simulationFileName));
+			simulationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(simulationFile), "UTF-8"));	
+			
+			simulationWriter.write(optionsString);
+			
+			simulationWriter.write("Particles:\n");
+			for (Particle particle : particles)
+				simulationWriter.write(particle.toString());	
+			
+			simulationWriter.close();
+		}
 	}
 	
 	public void recordPerformance(int step) throws IOException {
 		long now;
+
+		if (performanceWriter == null)
+			return;
 		
 		now = System.nanoTime();
 		
@@ -61,6 +116,8 @@ public class Librarian {
 	}
 	
 	public void recordConservation(int step) throws IOException {
+		if (conservationWriter == null)
+			return;
 		
 		if (step == 0)
 			conservationWriter.write("Step, Energy, Linear Momentum, Angular Momentum\n");
@@ -73,9 +130,15 @@ public class Librarian {
 		conservationWriter.write("\n");
 	}
 	
+	public void setZipFiles(Boolean zip) {
+		zipFiles = zip;
+	}
+	
 	public void janitor() throws IOException {
-		conservationWriter.close();
-		simulationWriter.close();
-		performanceWriter.close();
+		if (conservationWriter != null)
+			conservationWriter.close();
+
+		if (performanceWriter != null)
+			performanceWriter.close();
 	}
 }
