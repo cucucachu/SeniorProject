@@ -31,6 +31,10 @@ public class OctTree {
 		root = new OctNode(Vector3D.ZERO, calculateWidth(), theta, particles);
 	}
 	
+	public double getTheta() {
+		return theta;
+	}
+	
 	private double calculateWidth() {
 		double width;
 		

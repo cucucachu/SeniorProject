@@ -1975,3 +1975,689 @@ java.lang.StringIndexOutOfBoundsException: String index out of range: -10
 	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
 	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+!SESSION 2015-05-11 17:27:00.975 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 17:38:13.169
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 17:39:04.989
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 18:01:11.506
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 18:24:47.495
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 18:24:47.906
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 18:24:48.521
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 18:31:13.500
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 18:31:13.846
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 18:33:29.894
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryType.getAttachedJavadoc(BinaryType.java:995)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:54:35.792
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:54:51.140
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:55:13.893
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:55:13.953
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:55:25.528
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:56:03.432
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:56:04.634
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:56:04.857
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:56:55.916
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:56:56.015
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 21:56:57.801
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 22:00:30.633
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 22:00:47.122
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 22:06:43.842
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryType.getAttachedJavadoc(BinaryType.java:995)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 22:06:44.832
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryType.getAttachedJavadoc(BinaryType.java:995)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 22:31:46.567
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 23:05:26.621
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 23:20:52.800
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 23:20:56.723
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 23:20:58.486
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 23:23:28.208
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 23:23:28.861
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 23:23:29.970
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 2 0 2015-05-11 23:23:36.112
+!MESSAGE 
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.extractJavadoc(ProposalInfo.java:95)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.computeInfo(ProposalInfo.java:75)
+	at org.eclipse.jdt.internal.ui.text.java.ProposalInfo.getInfo(ProposalInfo.java:58)
+	at org.eclipse.jdt.internal.ui.text.java.AbstractJavaCompletionProposal.getAdditionalProposalInfo(AbstractJavaCompletionProposal.java:555)
+	at org.eclipse.jface.text.contentassist.AdditionalInfoController$3.run(AdditionalInfoController.java:106)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-11 23:25:34.619
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-12 11:19:45.768
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-12 13:18:17.397
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-12 13:25:20.494
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+!SESSION 2015-05-12 16:11:32.808 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2015-05-12 16:11:41.650
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jface.text 4 0 2015-05-12 17:49:45.508
+!MESSAGE Unexpected runtime error while computing a text hover
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: String index out of range: -10
+	at java.lang.String.checkBounds(String.java:371)
+	at java.lang.String.<init>(String.java:415)
+	at org.eclipse.jdt.internal.core.JavaElement.getURLContents(JavaElement.java:786)
+	at org.eclipse.jdt.internal.core.BinaryType.getJavadocContents(BinaryType.java:1037)
+	at org.eclipse.jdt.internal.core.BinaryMethod.getAttachedJavadoc(BinaryMethod.java:639)
+	at org.eclipse.jdt.internal.ui.text.javadoc.JavadocContentAccess2.getHTMLContent(JavadocContentAccess2.java:463)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo(JavadocHover.java:619)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.internalGetHoverInfo(JavadocHover.java:565)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavadocHover.getHoverInfo2(JavadocHover.java:557)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:163)
+	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:129)
+	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:85)
+	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:166)
+!SESSION 2015-05-12 19:35:16.792 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_55
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY org.eclipse.core.resources 2 10035 2015-05-12 19:35:23.535
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.

@@ -51,8 +51,15 @@ public class Particle {
 		position = position.add(velocity.scalarMultiply(timeStep));
 	}	
 	
-	public void verletStep(double timeStep, Vector3D accel) {
-		
+	public void verletPositionStep(double timeStep, Vector3D accel) {
+		position = position.add(velocity.scalarMultiply(timeStep));
+		position = position.add(accel.scalarMultiply(timeStep*timeStep / 2.));
+	}
+	
+	public void verletVelocityStep(double timeStep, Vector3D oldAccel, Vector3D newAccel) {
+		Vector3D accel = oldAccel.add(newAccel);
+		accel = accel.scalarMultiply(timeStep / 2.);
+		velocity = velocity.add(accel);
 	}
 
 	public void setColor(double red, double green, double blue) {

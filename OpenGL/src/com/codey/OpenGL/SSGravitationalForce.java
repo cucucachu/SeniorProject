@@ -13,26 +13,34 @@ public class SSGravitationalForce extends NForceField {
 	public Vector3D forceOnParticle(Particle particle) {
 		Vector3D r, force;
 		double magnitude;
+		double accelMagnitude;
 		ArrayList<Particle> reducedParticles;
 		
-		reducedParticles = octTree.reducedParticles(particle.getPosition());
+		if (octTree.getTheta() != 0)
+			reducedParticles = octTree.reducedParticles(particle.getPosition());
+		else
+			reducedParticles = particles;
 		
 		force = Vector3D.ZERO;
 		
 		for (Particle other : reducedParticles) {
-				r = other.getPosition().subtract(particle.getPosition());
-				
-				if (r.equals(Vector3D.ZERO))
-					continue;
+			
+			if (other.equals(particle))
+				continue;
+			
+			r = other.getPosition().subtract(particle.getPosition());
 
-				magnitude = r.getNorm();
-				r = r.normalize();
-				
-				
-				force = force.add(
-						r.scalarMultiply(
-						other.getMass() * forceConstant / (magnitude * magnitude))
-						);
+			magnitude = r.getNorm();
+			r = r.normalize();
+			
+			
+			if (magnitude < 1)
+				magnitude = 1;
+			
+			
+			accelMagnitude = other.getMass() * forceConstant / (magnitude * magnitude);
+			
+			force = force.add(r.scalarMultiply(accelMagnitude));
 			
 		}
 		return force;

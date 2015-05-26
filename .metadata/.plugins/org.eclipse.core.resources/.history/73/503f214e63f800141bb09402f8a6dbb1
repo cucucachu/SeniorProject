@@ -1,0 +1,127 @@
+package com.codey.OpenGL;
+
+import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
+import java.awt.Color; 
+
+public class Particle {
+	private Vector3D position;
+	private Vector3D velocity;
+	private double mass;
+	private double radius;
+	private double rgb[];
+	
+	public Particle(Vector3D position, double mass) {
+		this.position = position;
+		this.velocity = Vector3D.ZERO;
+		this.mass = mass;
+		radius = 0;
+		
+		rgb = new double[3];
+		rgb[0] = .5;
+		rgb[1] = .5;
+		rgb[2] = .5;
+	}
+	
+	public Particle(Vector3D position, Vector3D velocity, double mass) {
+		this.position = position;
+		this.velocity = velocity;
+		this.mass = mass;
+		radius = 0;
+		
+		rgb = new double[3];
+		rgb[0] = .5;
+		rgb[1] = .5;
+		rgb[2] = .5;
+	}
+	
+	public Particle(Vector3D position, Vector3D velocity, double mass, double radius) {
+		this.position = position;
+		this.velocity = velocity;
+		this.mass = mass;
+		this.radius = radius;
+
+		rgb = new double[3];
+		rgb[0] = .5;
+		rgb[1] = .5;
+		rgb[2] = .5;
+	}
+	
+	public void step(double timeStep, Vector3D force) {
+		velocity = velocity.add(force.scalarMultiply(timeStep));
+		position = position.add(velocity.scalarMultiply(timeStep));
+	}	
+	
+	public void verletPositionStep(double timeStep, Vector3D accel) {
+		position = position.add(velocity.scalarMultiply(timeStep));
+		position = position.add(accel.scalarMultiply(t*t));
+	}
+	
+	public void verletVelocityStep(double timeStep, Vector3D accel) {
+		
+	}
+
+	public void setColor(double red, double green, double blue) {
+		rgb[0] = red;
+		rgb[1] = green;
+		rgb[2] = blue;
+	}
+	
+	public void setColor(Color color) {
+		this.rgb[0] = color.getRed();
+		this.rgb[1] = color.getGreen();
+		this.rgb[2] = color.getBlue();
+	}
+
+	public void setColor(double[] rgb) {
+		this.rgb[0] = rgb[0];
+		this.rgb[1] = rgb[1];
+		this.rgb[2] = rgb[2];
+	}
+	
+	public Vector3D getPosition() {
+		return position;
+	}	
+	
+	public double getX() {
+		return position.getX();
+	}	
+	
+	public double getY() {
+		return position.getY();
+	}	
+	
+	public double getZ() {
+		return position.getZ();
+	}
+	
+	public Vector3D getVelocity() {
+		return velocity;
+	}	
+	
+	public void print() {
+		System.out.printf("   Pos: (%f, %f, %f)", position.getX(), position.getY(), position.getZ());
+		System.out.printf("   Vel: (%f, %f, %f)", velocity.getX(), velocity.getY(), position.getZ());
+		System.out.printf("   Mass: %.2f   Radius %.2f   Color (%.0f, %.0f, %.0f)\n", mass, radius, rgb[0], rgb[1], rgb[2]);
+		
+	}
+	
+	public String toString() {
+		return String.format("p %.15f < %.15f %.15f %.15f > < %.15f %.15f %.15f > %.15f grey\n",
+				mass, 
+				position.getX(), position.getY(), position.getZ(),
+				velocity.getX(), velocity.getY(), velocity.getZ(), 
+				radius);
+	}
+	
+	public double getMass() {
+		return mass;
+	}
+	
+	public double getRadius() {
+		return radius;
+	}
+	
+	public double[] getColor() {
+		return this.rgb;
+	}
+}

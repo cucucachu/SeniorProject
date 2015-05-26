@@ -7,6 +7,8 @@ public class Conservationist {
 
 	private ArrayList<Particle> particles;
 	private double initialEnergy;
+	private double initialKineticEnergy;
+	private double initialPotentialEnergy;
 	private Vector3D initialLinearMomentum;
 	private Vector3D initialAngularMomentum;
 	private double tolerance;
@@ -18,6 +20,8 @@ public class Conservationist {
 		this.forceConstant = forceConstant;
 		
 		initialEnergy = energy();
+		initialKineticEnergy = kineticEnergy();
+		initialPotentialEnergy = potentialEnergy();
 		initialLinearMomentum = linearMomentum();
 		initialAngularMomentum = angularMomentum();
 	}
@@ -35,14 +39,14 @@ public class Conservationist {
 	}
 	
 	public double energyDeviation() {
-		return 1 - energy() / initialEnergy;
+		return (energy() / initialEnergy) - 1;
 	}
 	
-	private double energy() {
+	public double energy() {
 		return kineticEnergy() + potentialEnergy();
 	}
 	
-	private double kineticEnergy() {
+	public double kineticEnergy() {
 		double ke;
 		
 		ke = 0;
@@ -52,12 +56,25 @@ public class Conservationist {
 		return ke;
 	}
 	
-	private double potentialEnergy() {
+	public double potentialEnergy() {
+		Vector3D r;
 		double pe;
+		double distance;
+		Particle particle, other;
 		
 		pe = 0;
-		for (Particle particle : particles)
-			pe += potentialEnergyForParticle(particle);
+		
+		for (int i = 0; i < particles.size(); i++) {
+			for (int ii = i - 1; ii >= 0; ii--) {
+				particle = particles.get(i);
+				other = particles.get(ii);
+				
+				r = other.getPosition().subtract(particle.getPosition());
+				distance = r.getNorm();
+				
+				pe += -1 * forceConstant * other.getMass() * particle.getMass() / distance;
+			}
+		}
 	
 		return pe;
 		
@@ -112,7 +129,7 @@ public class Conservationist {
 	}
 	
 	public double linearMomentumDeviation() {
-		return 1 - linearMomentum().getNorm() / initialLinearMomentum.getNorm();
+		return linearMomentum().getNorm() / initialLinearMomentum.getNorm() - 1;
 	}
 	
 	private Vector3D linearMomentum() {
