@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.awt.Color;
 
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
+
 import org.apache.commons.math3.geometry.euclidean.threed.Vector3D;
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
+import org.lwjgl.glfw.GLFWErrorCallback;
 
 public class Simulation {
 
@@ -20,6 +22,7 @@ public class Simulation {
 	private CameraMan carl;
 	private Conservationist colin;
 	private Librarian linda;
+	private KeyboardHandler keyboard;
 	
 	public ArrayList<Particle> particles;
 	public SSGravitationalForce gravity;
@@ -50,6 +53,8 @@ public class Simulation {
 	private String performanceFileName;
 	private String energyFileName;
 	private boolean zipFiles;
+	
+    private GLFWErrorCallback errorCallback;
 	
 	public Simulation(File inputFile) throws Exception {
 		particles = new ArrayList<Particle>();
@@ -83,34 +88,43 @@ public class Simulation {
 		zipFiles = false;
 	}
 	
-	private void initialize() throws LWJGLException, FileNotFoundException, UnsupportedEncodingException {
+	private void initialize() throws FileNotFoundException, UnsupportedEncodingException {
+        glfwSetErrorCallback(errorCallback = errorCallbackPrint(System.out));
+		
 		colin = new Conservationist(particles, conservationTolerance, gravitationalConstant);
 		
 		linda = new Librarian(particles, colin);
 		linda.setConservationFileName(conservationFileName);
 		linda.setSimulationFileName(simulationFileName);
 		linda.setPerformanceFileName(performanceFileName);	
-		linda.setEnergyFileName(energyFileName);	
+		linda.setEnergyFileName(energyFileName);
+		linda.setOptionsString(optionsString());
 		linda.start();
+		
 		
 		if (graphicsEnabled) {
 			picaso = new Painter(WIDTH, HEIGHT, FRAME_RATE);
 			carl = new CameraMan();
 			carl.setParticles(particles);
 			carl.track(particles.get(particleToTrack));
+			keyboard = new KeyboardHandler(picaso, carl, linda);
+			glfwSetKeyCallback(picaso.getWindow(), keyboard); 
 		}
+
 		
 		gravity = new SSGravitationalForce(gravitationalConstant, particles, barnesHutTheta);
 	}
 	
 	private void simulate() throws Exception {	
-		
+		render();
+		while(!picaso.isCloseRequested());
+		picaso.janitor();
+		/*
 		while(maxStep == 0 || step < maxStep) {
 
 			if (graphicsEnabled) {
 				if (picaso.isCloseRequested())
 					break;
-				picaso.checkForDisplayResize();
 			}
 			
 			if (play)
@@ -118,17 +132,17 @@ public class Simulation {
 
 			if (graphicsEnabled) {
 				render();
-				snapShotSave();
-				checkForPause();
+				//snapShotSave();
+				//checkForPause();
 			}
 			
 			if (!conservative())
 				break;
 			
 			if (recurringSave != 0 && step % recurringSave == 0)
-				linda.recordSimulation(optionsString());
+				linda.recordSimulation();
 			
-			if (step % 100 == 0)
+			//if (step % 100 == 0)
 				System.out.printf("Finished step %d\n", step);
 			
 			//if (saveScreenshots && step % 10 == 0)
@@ -137,6 +151,7 @@ public class Simulation {
 			step++;
 			
 		}
+		*/
 
 	}
 	
@@ -220,12 +235,14 @@ public class Simulation {
 		picaso.clear();
 		carl.setup();
 	
-		
+		/*
 		for (Particle particle : particles)
 			picaso.drawParticle(particle);
 		
 		if (showOctTree)
 			picaso.drawOctTree(gravity.getOctTree().getRoot());
+		*/
+		picaso.drawSquare(0, 0, 100);
 		picaso.render();
 		
 	}
@@ -305,7 +322,7 @@ public class Simulation {
 	 *  Real Time Input Handlers
 	 *  ------------------------------------------------------------
 	 */
-	
+	/*
 	private void snapShotSave() throws IOException {		
 		if (Keyboard.isKeyDown(Keyboard.KEY_RETURN)) {
 			if (debounce++ == 0)
@@ -325,7 +342,7 @@ public class Simulation {
 				debounce = 0;
 		}
 	}
-	
+	*/
 	/*  ------------------------------------------------------------
 	 *  Input File Reading Methods
 	 *  ------------------------------------------------------------

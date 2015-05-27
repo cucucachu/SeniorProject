@@ -21,6 +21,7 @@ public class Librarian {
 	private ZipOutputStream energyZipper;
 	
 	private ArrayList<Particle> particles;
+	private String optionsString;
 	private Conservationist colin;
 	
 	private long lastTime;
@@ -39,6 +40,7 @@ public class Librarian {
 		conservationZipper = null;
 		performanceZipper = null;
 		energyZipper = null;
+		optionsString = null;
 	}
 	
 	public void start() throws UnsupportedEncodingException, FileNotFoundException {
@@ -83,6 +85,10 @@ public class Librarian {
     public void setEnergyFileName(String path) {
 		energyFileName = path;
 	}
+    
+    public void setOptionsString(String optionsString) {
+    	this.optionsString = optionsString;
+    }
 	
 	public String addDateToFileName(String file) {
 		String extension = file.substring(file.indexOf('.'));
@@ -97,7 +103,7 @@ public class Librarian {
 	 *  ------------------------------------------------------------
 	 */
 	
-	public String recordSimulation(String optionsString) throws IOException {
+	public String recordSimulation() throws IOException {
 		BufferedWriter simulationWriter;
 		
 		if (simulationFileName.toLowerCase().compareTo("none") != 0) {
@@ -105,7 +111,8 @@ public class Librarian {
 			File simulationFile = new File(simulationFileName);
 			simulationWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(simulationFile), "UTF-8"));	
 			
-			simulationWriter.write(optionsString);
+			if (optionsString != null)
+				simulationWriter.write(optionsString);
 			
 			simulationWriter.write("Particles:\n");
 			for (Particle particle : particles)

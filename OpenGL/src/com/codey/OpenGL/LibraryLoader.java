@@ -1,12 +1,15 @@
 package com.codey.OpenGL;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import org.lwjgl.LWJGLException;
 
 public class LibraryLoader {
 	
-	public static void loadNativeLibrary() throws LWJGLException, Exception {
+	public static void loadNativeLibrary() {
+		System.setProperty("org.lwjgl.librarypath",System.getProperty("user.dir") + File.separator + "libs" + File.separator + "lwjgl" + File.separator + "native");
+		/*
+		
 		String os = System.getProperty("os.name");
 		String arch = System.getProperty("os.arch");
 		
@@ -24,6 +27,7 @@ public class LibraryLoader {
 			else
 				System.loadLibrary("OpenAL32");
 		}
+		*/
 		
 	}
 	

@@ -74,9 +74,9 @@ public class SimulationCreator {
 		//randomAndromeda();
 		
 		linda = new Librarian(particles, null);
-		
+		linda.setOptionsString(optionsString());
 		linda.setSimulationFileName(SIMULATION_FILE_PATH);
-		savedFilePath = linda.recordSimulation(optionsString());
+		savedFilePath = linda.recordSimulation();
 		linda.janitor();
 	}
 	
@@ -96,7 +96,7 @@ public class SimulationCreator {
 		showOctTree = false;
 		breakOnEnergyNotConserved = false;
 		graphicsEnabled = true;
-		saveScreenshots = true;
+		saveScreenshots = false;
 		
 		conservationFileName = "/home/cody/School/SeniorProject/Output/Conservation.csv";
 		performanceFileName = "none"; //"/home/cody/School/SeniorProject/Output/Performance.csv";

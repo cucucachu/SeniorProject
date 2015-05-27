@@ -1,0 +1,23 @@
+package com.codey.OpenGL;
+
+import org.lwjgl.glfw.GLFWKeyCallback; 
+import static org.lwjgl.glfw.GLFW.*;
+
+public class KeyboardHandler extends GLFWKeyCallback {
+	private Painter picaso;
+	private CameraMan carl;
+
+	public KeyboardHandler(Painter picaso, CameraMan carl) {
+		super();
+		this.picaso = picaso;
+		this.carl = carl;
+	}
+	
+	@Override
+	public void invoke(long window, int key, int scancode, int action, int mods) {
+        if (action == GLFW_RELEASE && key == GLFW_KEY_LEFT || key == GLFW_KEY_A)
+        	carl.trackNext();
+		
+	}
+
+}
